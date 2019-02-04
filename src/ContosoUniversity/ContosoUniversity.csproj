@@ -238,6 +238,8 @@
     <Content Include="Views\Home\Authenticate.cshtml" />
     <Content Include="Views\Home\CreateUser.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Student\CreateUser.cshtml" />
+    <Content Include="Views\Instructor\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

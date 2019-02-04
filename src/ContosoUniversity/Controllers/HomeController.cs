@@ -56,7 +56,7 @@ namespace ContosoUniversity.Controllers
         [HttpGet]
         public ActionResult Authenticate()
         {
-            ViewBag.Message = "Authentication";
+            //ViewBag.Message = "Authentication";
 
             return View();
         }
@@ -67,10 +67,12 @@ namespace ContosoUniversity.Controllers
             if (login == null)
             {
                 ViewBag.LoginNull = "Login is needed";
+                return View();
             }
             if (password == null)
             {
-                ViewBag.Password = "Password is needed";
+                ViewBag.PasswordNull = "Password is needed";
+                return View();
             }
             List<Person> person = new List<Person>();
             person = db.People.ToList();
@@ -80,19 +82,21 @@ namespace ContosoUniversity.Controllers
                 {
                     if ((item.Login == login) && (item.Login == password))
                     {
-                        return View();
+                        return RedirectToAction("Index");
                     }
                     else
                     {
                         ViewBag.PasswordFalse = "Passworld wrong.";
+                        return View();
                     }
                 }
             }
             else
             {
                 ViewBag.LoginWrong = "Login not found.";
+                return View();
             }
-            return View(ViewBag);
+            return View();
         }
 
         [HttpGet]
@@ -103,34 +107,39 @@ namespace ContosoUniversity.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string login, string password, string password2, string SelectType)
+        public ActionResult Register(string login, string password1, string password2, string SelectType)
         {
             if (login == null)
             {
                 ViewBag.LoginNull = "Login is needed";
+                return View();
             }
-            if (password == null)
+            if (password1 == null)
             {
-                ViewBag.PasswordNull = "Password is needed";
+                ViewBag.Password1Null = "Password is needed";
+                return View();
             }
             if (password2 == null)
             {
                 ViewBag.Password2Null = "Confirm your password";
+                return View();
             }
             List<Person> person = new List<Person>();
             person = db.People.ToList();
             if (person.Exists(p => p.Login == login))
             {
                 ViewBag.LoginNotAvailable = "This login already exists.";
+                return View();
             }
-            if (password != password2)
+            if (password1 != password2)
             {
                 ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
+                return View();
             }
             else
             {
                 ViewBag.Login = login;
-                ViewBag.Password = password;
+                ViewBag.Password = password1;
                 if (SelectType == "Student")
                 {
                     return RedirectToAction("CreateUser", "Student");
@@ -141,10 +150,10 @@ namespace ContosoUniversity.Controllers
                 }
                 else
                 {
-                    return ViewBag.TypeNull = "You must choose a type.";
+                    ViewBag.TypeNull = "You must choose a type.";
+                    return View();
                 }
             }
-            return View(ViewBag);
         }
 
     }
