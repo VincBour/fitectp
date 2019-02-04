@@ -259,5 +259,11 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpGet]
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
     }
 }

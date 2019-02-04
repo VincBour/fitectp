@@ -60,7 +60,7 @@ namespace ContosoUniversity.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(students.ToPagedList(pageNumber, pageSize));
         }
@@ -202,5 +202,18 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+
+        //Create a new student user
+        [HttpGet]
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public ActionResult CreateUser(string, string,//etc)
+        //{
+        //    return View();
+        //}
     }
 }

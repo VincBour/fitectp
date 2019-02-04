@@ -16,6 +16,9 @@ namespace ContosoUniversity.Models
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string EmailAddress { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName
