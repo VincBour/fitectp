@@ -155,9 +155,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902040923491_UpdatePerson.cs" />
-    <Compile Include="Migrations\201902040923491_UpdatePerson.Designer.cs">
-      <DependentUpon>201902040923491_UpdatePerson.cs</DependentUpon>
+    <Compile Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.cs" />
+    <Compile Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.Designer.cs">
+      <DependentUpon>201902051511500_update_dbo_Person_For_UploadImg.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
@@ -264,8 +264,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902040923491_UpdatePerson.resx">
-      <DependentUpon>201902040923491_UpdatePerson.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.resx">
+      <DependentUpon>201902051511500_update_dbo_Person_For_UploadImg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

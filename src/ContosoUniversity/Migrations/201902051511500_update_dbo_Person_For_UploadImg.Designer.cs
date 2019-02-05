@@ -6,14 +6,14 @@ namespace ContosoUniversity.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class UpdatePerson : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
+    public sealed partial class update_dbo_Person_For_UploadImg : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdatePerson));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(update_dbo_Person_For_UploadImg));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902040923491_UpdatePerson"; }
+            get { return "201902051511500_update_dbo_Person_For_UploadImg"; }
         }
         
         string IMigrationMetadata.Source
