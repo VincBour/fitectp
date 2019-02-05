@@ -1,0 +1,66 @@
+﻿@model ContosoUniversity.Models.CourseSession
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CourseSession</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseIDNavigation.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseIDNavigation.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InstructorIDNavigation.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstructorIDNavigation.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfWeek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DayOfWeek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HourStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HourStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HourEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HourEnd)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

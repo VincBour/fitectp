@@ -33,5 +33,7 @@ namespace ContosoUniversity.DAL
 
             modelBuilder.Entity<Department>().MapToStoredProcedures();
         }
+
+        public System.Data.Entity.DbSet<ContosoUniversity.Models.CourseSession> CourseSessions { get; set; }
     }
 }
