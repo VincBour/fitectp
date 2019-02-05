@@ -54,6 +54,25 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<CourseSession> sessions = new List<CourseSession>();
+                sessions = db.CourseSessions.ToList();
+                foreach (var item in sessions)
+                {
+                    if (courseSession.InstructorID == item.InstructorID && courseSession.CourseID == item.CourseID)
+                    {
+                        ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
+                        ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                        ViewBag.ErrorMessage = "you have already this course";
+                        return View();
+                    }
+                }
+                if (courseSession.HourEnd - courseSession.HourStart < 0)
+                {
+                    ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
+                    ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                    ViewBag.ErrorMessageTime = "Time can't be negative";
+                    return View();
+                }
                 db.CourseSessions.Add(courseSession);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -24,10 +24,7 @@
             @Html.DisplayNameFor(model => model.DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HourStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HourEnd)
+            @Html.DisplayNameFor(model => model.Time)
         </th>
         <th></th>
     </tr>
@@ -47,10 +44,7 @@
             @Html.DisplayFor(modelItem => item.DateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.HourStart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HourEnd)
+            @Html.DisplayFor(modelItem => item.Time) Hours
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
