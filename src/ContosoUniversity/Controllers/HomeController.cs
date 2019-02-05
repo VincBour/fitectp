@@ -105,7 +105,6 @@ namespace ContosoUniversity.Controllers
                 ViewBag.LoginWrong = "Login not found.";
                 return View();
             }
-            return View();
         }
         #endregion
 

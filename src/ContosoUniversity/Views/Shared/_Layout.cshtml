@@ -36,7 +36,10 @@
                     <li>@Html.ActionLink("Courses", "Index", "Course")</li>
                     <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
+
                 </ul>
+                <button type="button" class="btn btn-default active" id="LoginButton"><span class="glyphicon glyphicon-lock"></span>@Html.ActionLink("Login", "Authenticate", "Home")</button>
+                <button type="button" class="btn btn-default active" id="SignInButton"><span class="glyphicon glyphicon-user"></span>@Html.ActionLink("Sign in", "CreateUser", "Home")</button>
             </div>
         </div>
     </div>
