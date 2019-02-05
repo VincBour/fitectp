@@ -137,7 +137,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -150,7 +150,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -162,6 +162,25 @@ namespace ContosoUniversity.Controllers
             {
                 try
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        if (studentToUpdate.Files.Any(f => f.FileType == FileType.Avatar))
+                        {
+                            db.Files.Remove(studentToUpdate.Files.First(f => f.FileType == FileType.Avatar));
+                        }
+                        var avatar = new File
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.Avatar,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        studentToUpdate.Files = new List<File> { avatar };
+                    }
+                    db.Entry(studentToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
