@@ -225,7 +225,7 @@ namespace ContosoUniversity.Controllers
             {
                 db.Enrollments.Add(enrollment);
                 db.SaveChanges();
-                return RedirectToAction("Details",enrollment.StudentID);
+                return RedirectToAction("Details",new { id = enrollment.StudentID });
             }
 
             ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title", enrollment.CourseID);
