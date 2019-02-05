@@ -46,7 +46,7 @@ namespace ContosoUniversity.Tests.Controllers
         {
             Assert.True(true);
         }
-        [Test]
+        
         
     }
 }
