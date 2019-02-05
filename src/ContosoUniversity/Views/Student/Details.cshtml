@@ -61,3 +61,16 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $.getJSON("/api/StudentApi/@Model.ID",
+            function (data) {
+
+                $('#InfoStudent').text(data);
+
+            })
+    })
+    </script>
+}
