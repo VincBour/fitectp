@@ -14,6 +14,7 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        #region Methods preexisting
         public ActionResult Index()
         {
             return View();
@@ -51,27 +52,37 @@ namespace ContosoUniversity.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+        #endregion
 
-        //Add ActionResult
+        #region Authentication
+
+        /// <summary>
+        /// This httpget action is called from homepage to authentication
+        /// </summary>
+        /// <returns>View(Form to enter his long and password)</returns>
         [HttpGet]
         public ActionResult Authenticate()
-        {
-            //ViewBag.Message = "Authentication";
-
+        { 
             return View();
         }
 
+        /// <summary>
+        /// This httpost action compares the login and the password with the database to authenticate the user
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns>if validation: View(Home)</returns>
         [HttpPost]
         public ActionResult Authenticate(string login, string password)
         {
             if (login == null)
             {
-                ViewBag.LoginNull = "Login is needed";
+                ViewBag.LoginNull = "Login is required";
                 return View();
             }
             if (password == null)
             {
-                ViewBag.PasswordNull = "Password is needed";
+                ViewBag.PasswordNull = "Password is required";
                 return View();
             }
             List<Person> person = new List<Person>();
@@ -98,63 +109,82 @@ namespace ContosoUniversity.Controllers
             }
             return View();
         }
+        #endregion
 
+        #region Register a new user
+
+        /// <summary>
+        /// This httpget action is called from homepage or authenticationView to register a new user
+        /// </summary>
+        /// <returns>View(form to enter login and password, confirm password and specify if the new user will be student or instructor)</returns>
         [HttpGet]
         public ActionResult Register()
         {
-            ViewBag.Message = "Register";
             return View();
         }
 
+        /// <summary>
+        /// This httppost action verify if login his available, compares the two passwords and ask the type of the user to create
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <param name="password2"></param>
+        /// <param name="SelectType"></param>
+        /// <returns>if new user is student: redirect to StudentController, CreateUserAction, else if new user is instructor: redirect to InstructorController, CreateUserAction,</returns>
+
         [HttpPost]
-        public ActionResult Register(string login, string password1, string password2, string SelectType)
+        public ActionResult Register(string login, string password, string password2, string SelectType)
         {
+            List<Person> person = new List<Person>();
+            person = db.People.ToList();
+
             if (login == null)
             {
-                ViewBag.LoginNull = "Login is needed";
+                ViewBag.LoginNull = "Login is required";
                 return View();
             }
-            if (password1 == null)
+            else if (password == null)
             {
-                ViewBag.Password1Null = "Password is needed";
+                ViewBag.PasswordNull = "Password is required";
                 return View();
             }
-            if (password2 == null)
+            else if (password2 == null)
             {
                 ViewBag.Password2Null = "Confirm your password";
                 return View();
             }
-            List<Person> person = new List<Person>();
-            person = db.People.ToList();
-            if (person.Exists(p => p.Login == login))
+            else if (person.Exists(p => p.Login == login))
             {
                 ViewBag.LoginNotAvailable = "This login already exists.";
                 return View();
             }
-            if (password1 != password2)
-            {
-                ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
-                return View();
-            }
             else
             {
-                ViewBag.Login = login;
-                ViewBag.Password = password1;
-                if (SelectType == "Student")
+                if (password != password2)
                 {
-                    return RedirectToAction("CreateUser", "Student");
-                }
-                else if (SelectType == "Instructor")
-                {
-                    return RedirectToAction("CreateUser", "Instructor");
+                    ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
+                    return View();
                 }
                 else
                 {
-                    ViewBag.TypeNull = "You must choose a type.";
-                    return View();
+                    TempData["Login"] = login;
+                    TempData["Password"] = password;
+                    if (SelectType == "Student")
+                    {
+                        return RedirectToAction("CreateUser", "Student");
+                    }
+                    else if (SelectType == "Instructor")
+                    {
+                        return RedirectToAction("CreateUser", "Instructor");
+                    }
+                    else
+                    {
+                        ViewBag.TypeNull = "You must choose a type.";
+                        return View();
+                    }
                 }
             }
         }
-
+        #endregion
     }
 }

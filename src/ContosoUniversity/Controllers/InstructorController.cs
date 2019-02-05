@@ -17,6 +17,7 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        #region Methods preexisting
         // GET: Instructor
         public ActionResult Index(int? id, int? courseID)
         {
@@ -259,11 +260,64 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
 
+        #region Creation of a new Instructor account
+
+        /// <summary>
+        /// This action is called from HomeController to register a new instructor user
+        /// </summary>
+        /// <returns>View(form to complete instructor informations)</returns>
         [HttpGet]
         public ActionResult CreateUser()
         {
             return View();
         }
+
+        /// <summary>
+        /// This httppost action verify if fields required are completed and add a new instructor in the database
+        /// </summary>
+        /// <param name="lastname"></param>
+        /// <param name="firstmidname"></param>
+        /// <param name="emailaddress"></param>
+        /// <param name="hiredate"></param>
+        /// <returns>View(Home)</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser(string lastname, string firstmidname, string emailaddress, DateTime hiredate)
+        {
+            if (lastname == null)
+            {
+                ViewBag.LastNameNull = "Lastname is required";
+                return View();
+            }
+            else if (firstmidname == null)
+            {
+                ViewBag.FirstMidNameNull = "Firstmidname is required";
+                return View();
+            }
+            else if (hiredate == null)
+            {
+                ViewBag.HireDateNull = "Date of your hiring is required";
+                return View();
+            }
+            else
+            {
+                Instructor instructor=new Instructor
+                {
+                    FirstMidName = firstmidname,
+                    LastName = lastname,
+                    HireDate = hiredate,
+                    EmailAddress = emailaddress,
+                    Login = ViewBag.login,
+                    Password = ViewBag.password
+                };
+                db.Instructors.Add(instructor);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+        }
+        #endregion
     }
 }

@@ -26,6 +26,7 @@ namespace ContosoUniversity.Tests.Controllers
             controllerToTest.DbContext = dbContext;
         }
 
+        #region Tests preexisting
         [Test]
         public void GetDetails_ValidStudent_Success()
         {
@@ -78,5 +79,11 @@ namespace ContosoUniversity.Tests.Controllers
             Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
             Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
         }
+        #endregion
+
+        #region New Tests to check creation of a new student user
+        #endregion
+
+
     }
 }

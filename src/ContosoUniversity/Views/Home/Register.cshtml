@@ -12,10 +12,8 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Person</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -31,15 +29,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                <span>@ViewBag.Password1Null </span>
+                <span>@ViewBag.PasswordNull </span>
             </div>
         </div>
         <br />
         <div class="form-group">
             <p style="text-align: left">Confirm your password</p>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <input name="password2" type="text" class="form-control" />
                 <span>@ViewBag.Password2Null @ViewBag.PasswordsNotEquals</span>
             </div>
         </div>

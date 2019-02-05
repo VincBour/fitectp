@@ -19,6 +19,7 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        #region Methods preexisting
         // GET: Student
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -202,18 +203,57 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
 
-        //Create a new student user
+        #region Creation of a new Student account
+
+        /// <summary>
+        /// This action is called from HomeController to register a new student user
+        /// </summary>
+        /// <returns>View(form to complete student informations)</returns>
         [HttpGet]
         public ActionResult CreateUser()
         {
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult CreateUser(string, string,//etc)
-        //{
-        //    return View();
-        //}
+        /// <summary>
+        /// This httppost action verify if fields required are completed and add a new student in the database
+        /// </summary>
+        /// <param name="lastname"></param>
+        /// <param name="firstmidname"></param>
+        /// <param name="emailaddress"></param>
+        /// <returns>View(Home)</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser(string lastname, string firstmidname, string emailaddress)
+        {
+            if (lastname == null)
+            {
+                ViewBag.LastNameNull = "Lastname is required";
+                return View();
+            }
+            else if (firstmidname == null)
+            {
+                ViewBag.FirstMidNameNull = "Firstmidname is required";
+                return View();
+            }
+            else
+            {
+                Student student = new Student
+                {
+                    FirstMidName = firstmidname,
+                    LastName = lastname,
+                    EnrollmentDate = DateTime.Now,
+                    EmailAddress = emailaddress,
+                    Login = TempData["Login"],
+                    Password = TempData["Password"]
+                };
+                db.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        #endregion
     }
 }
