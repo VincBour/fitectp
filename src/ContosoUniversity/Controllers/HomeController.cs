@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 
 
 namespace ContosoUniversity.Controllers
-{
+{   [AllowAnonymous]
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -53,7 +56,28 @@ namespace ContosoUniversity.Controllers
             base.Dispose(disposing);
         }
         #endregion
+        #region User
+        public Person obtainPerson(int id)
+        {
+            return db.People.FirstOrDefault(p => p.ID == id);
+        }
 
+        public Person obtainPerson (string idStr)
+        {
+            int id;
+            if (int.TryParse(idStr, out id))
+            {
+                return obtainPerson(id);
+            }
+            return null;
+        }
+        public Person checkUser (string login, string password)
+        {
+            string passwordEncode = EncodeMD5(password);
+            return db.People.FirstOrDefault(p => p.Login == login && p.Password == passwordEncode);
+        }
+        #endregion
+        
         #region Authentication
 
         /// <summary>
@@ -63,7 +87,12 @@ namespace ContosoUniversity.Controllers
         [HttpGet]
         public ActionResult Authenticate()
         {
-            return View();
+            UserViewModel viewModel = new UserViewModel { Authenticate = HttpContext.User.Identity.IsAuthenticated };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                viewModel.Person = obtainPerson(HttpContext.User.Identity.Name);
+            }
+            return View(viewModel);
         }
 
         /// <summary>
@@ -73,39 +102,53 @@ namespace ContosoUniversity.Controllers
         /// <param name="password"></param>
         /// <returns>if validation: View(Home)</returns>
         [HttpPost]
-        public ActionResult Authenticate(string login, string password)
+        public ActionResult Authenticate(/*string login, string password,*/UserViewModel viewModel, string returnUrl)
         {
-            // check login and password are completed
-            if (login == string.Empty)
+            //// check login and password are completed
+            //if (login == string.Empty)
+            //{
+            //    ViewBag.LoginNull = "Login is required";
+            //    return View();
+            //}
+            //else if (password == string.Empty)
+            //{
+            //    ViewBag.PasswordNull = "Password is required";
+            //    return View();
+            //}
+            ////check user exists and password is correct
+            //else if (db.People.Any(p => p.Login == login))
+            //{
+            //    Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password);
+            //    if (user == null)
+            //    {
+            //        ViewBag.PasswordFalse = "Passworld wrong.";
+            //        return View();
+            //    }
+            //    else
+            //    {
+            //        return RedirectToAction("Index", "Home");
+            //    }
+            //}
+            //else
+            //{
+            //    ViewBag.LoginWrong = "Login not found.";
+            //    return View();
+            //}
+            if (ModelState.IsValid)
             {
-                ViewBag.LoginNull = "Login is required";
-                return View();
-            }
-            else if (password == string.Empty)
-            {
-                ViewBag.PasswordNull = "Password is required";
-                return View();
-            }
-            //check user exists and password is correct
-            else if (db.People.Any(p => p.Login == login))
-            {
-                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password);
-                if (user == null)
+                Person person = checkUser(viewModel.Person.Login, viewModel.Person.Password);
+                if (person !=null)
                 {
-                    ViewBag.PasswordFalse = "Passworld wrong.";
-                    return View();
+                    FormsAuthentication.SetAuthCookie(person.ID.ToString(), false);
+                    if (!string.IsNullOrWhiteSpace(returnUrl)&&Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    return Redirect("/");
                 }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                ModelState.AddModelError("User","Login or password wrong");
             }
-            else
-            {
-                ViewBag.LoginWrong = "Login not found.";
-                return View();
-            }
-            return View();
+            return View(viewModel);
         }
         #endregion
 
@@ -218,6 +261,15 @@ namespace ContosoUniversity.Controllers
             }
         }
 
+        #endregion
+
+        #region Encode
+
+    private string EncodeMD5(string password)
+        {
+            string passwordCode = "ContoseUniversity" + password + "devnet";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordCode)));
+        }
         #endregion
     }
 }
