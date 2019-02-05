@@ -118,6 +118,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -155,14 +156,20 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.cs" />
-    <Compile Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.Designer.cs">
-      <DependentUpon>201902051511500_update_dbo_Person_For_UploadImg.cs</DependentUpon>
+    <Compile Include="Migrations\201902051638343_add_dbo_File.cs" />
+    <Compile Include="Migrations\201902051638343_add_dbo_File.Designer.cs">
+      <DependentUpon>201902051638343_add_dbo_File.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902051956089_Update_dbo_Person.cs" />
+    <Compile Include="Migrations\201902051956089_Update_dbo_Person.Designer.cs">
+      <DependentUpon>201902051956089_Update_dbo_Person.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Enum\FileType.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\File.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Person.cs" />
@@ -240,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -264,8 +272,11 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902051511500_update_dbo_Person_For_UploadImg.resx">
-      <DependentUpon>201902051511500_update_dbo_Person_For_UploadImg.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902051638343_add_dbo_File.resx">
+      <DependentUpon>201902051638343_add_dbo_File.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902051956089_Update_dbo_Person.resx">
+      <DependentUpon>201902051956089_Update_dbo_Person.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

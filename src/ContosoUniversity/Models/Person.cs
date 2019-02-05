@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
@@ -19,9 +20,7 @@ namespace ContosoUniversity.Models
         public string Login { get; set; }
         public string Password { get; set; }
         public string EmailAddress { get; set; }
-        public string FileName { get; set; }
-        public string ContentType { get; set; }
-        public byte[] Content { get; set; }
+        
         [Display(Name = "Full Name")]
         public string FullName
         {
@@ -30,5 +29,6 @@ namespace ContosoUniversity.Models
                 return LastName + ", " + FirstMidName;
             }
         }
+        public virtual ICollection<File> Files { get; set; }
     }
 }

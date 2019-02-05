@@ -2,10 +2,13 @@
 using ContosoUniversity.Models;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ContosoUniversity.Controllers
@@ -74,7 +77,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s=>s.Files).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -93,12 +96,26 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")]Student student)
+        public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")]Student student, HttpPostedFileBase upload)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var avatar = new File
+                        {
+                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            FileType = FileType.Avatar,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        student.Files = new List<File> { avatar };
+                    }
                     db.Students.Add(student);
                     db.SaveChanges();
                     return RedirectToAction("Index");
