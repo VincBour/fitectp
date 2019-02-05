@@ -28,5 +28,7 @@ namespace ContosoUniversity.Models
                 return LastName + ", " + FirstMidName;
             }
         }
+        public string FilName { get; set; }
+        public string ContentType { get; set; }
     }
 }
