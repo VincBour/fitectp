@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -105,19 +106,34 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        string typeFile = System.IO.Path.GetExtension(upload.FileName);
+                        //getting the image
+                        string fileName = System.IO.Path.GetExtension(upload.FileName);
+                        //call of the verification class CheckImage
                         CheckImage check = new CheckImage();
-                        bool test = check.checkExtention(typeFile);
 
-                        if (test == false)
+                        //call of the verification Extension method
+                        bool extensionIsTrue = check.checkExtension(fileName);
+
+                        if (extensionIsTrue == false)
                         {
                             ViewBag.ErrorType = "Image extention authorized is png or jpeg";
                             return View();
                         }
 
-                        var avatar = new File
+                        //call of the class FileInfo(provides properties and instance methods for the creation, copying, deletion, moving and opening of file
+                        FileInfo fileInfo = new FileInfo(fileName);
+                        //call of the verfication Size method
+                        bool sizeIsCorrect = check.checkSize(fileInfo);
+
+                        if (sizeIsCorrect==false)
                         {
-                            FileName = System.IO.Path.GetFileName(upload.FileName),
+                            ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                            return View();
+                        }
+
+                        var avatar = new FileImage
+                        {
+                            FileName = Path.GetFileName(upload.FileName),
                             FileType = FileType.Avatar,
                             ContentType = upload.ContentType
                         };
@@ -125,7 +141,7 @@ namespace ContosoUniversity.Controllers
                         {
                             avatar.Content = reader.ReadBytes(upload.ContentLength);
                         }
-                        student.Files = new List<File> { avatar };
+                        student.Files = new List<FileImage> { avatar };
                     }
                     db.Students.Add(student);
                     db.SaveChanges();
@@ -175,9 +191,9 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        string typeFile = System.IO.Path.GetExtension(upload.FileName);
+                        string typeFile = Path.GetExtension(upload.FileName);
                         CheckImage check = new CheckImage();
-                        bool test = check.checkExtention(typeFile);
+                        bool test = check.checkExtension(typeFile);
 
                         if (test == false)
                         {
@@ -192,17 +208,28 @@ namespace ContosoUniversity.Controllers
                                 db.Files.Remove(studentToUpdate.Files.First(f => f.FileType == FileType.Avatar));
                             }
 
-                            var avatar = new File
+                            //getting the image
+                            string fileName = System.IO.Path.GetExtension(upload.FileName);
+                            
+                            //call of the verification Extension method
+                            bool extensionIsTrue = check.checkExtension(fileName);
+
+                            if (extensionIsTrue == false)
                             {
-                                FileName = System.IO.Path.GetFileName(upload.FileName),
-                                FileType = FileType.Avatar,
-                                ContentType = upload.ContentType
-                            };
-                            using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                            {
-                                avatar.Content = reader.ReadBytes(upload.ContentLength);
+                                ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                                return View();
                             }
-                            studentToUpdate.Files = new List<File> { avatar };
+
+                            //call of the class FileInfo(provides properties and instance methods for the creation, copying, deletion, moving and opening of file
+                            FileInfo fileInfo = new FileInfo(fileName);
+                            //call of the verfication Size method
+                            bool sizeIsCorrect = check.checkSize(fileInfo);
+
+                            if (sizeIsCorrect == false)
+                            {
+                                ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                                return View();
+                            }
                         }
                     }
                     db.Entry(studentToUpdate).State = EntityState.Modified;

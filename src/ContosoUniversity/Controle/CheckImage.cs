@@ -14,7 +14,7 @@ namespace ContosoUniversity.Controle
         }
 
         bool testExt = false;
-        public bool checkExtention(string fileName)
+        public bool checkExtension(string fileName)
         {
             string typeFile = System.IO.Path.GetExtension(fileName);
             if (typeFile == ".png" || typeFile == ".jpeg" || typeFile == ".jpg")

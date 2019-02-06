@@ -174,7 +174,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
-    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\FileImage.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Person.cs" />

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ContosoUniversity.Models
 {
-    public class File
+    public class FileImage
     {
         public int FileId { get; set; }
         [StringLength(255)]
