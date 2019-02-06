@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.DAL;
+﻿using ContosoUniversity.Controle;
+using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using PagedList;
 using System;
@@ -77,7 +78,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Include(s=>s.Files).SingleOrDefault(s => s.ID == id);
+            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -104,6 +105,16 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
+                        string typeFile = System.IO.Path.GetExtension(upload.FileName);
+                        CheckImage check = new CheckImage();
+                        bool test = check.checkExtention(typeFile);
+
+                        if (test == false)
+                        {
+                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            return View();
+                        }
+
                         var avatar = new File
                         {
                             FileName = System.IO.Path.GetFileName(upload.FileName),
@@ -164,21 +175,35 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        if (studentToUpdate.Files.Any(f => f.FileType == FileType.Avatar))
+                        string typeFile = System.IO.Path.GetExtension(upload.FileName);
+                        CheckImage check = new CheckImage();
+                        bool test = check.checkExtention(typeFile);
+
+                        if (test == false)
                         {
-                            db.Files.Remove(studentToUpdate.Files.First(f => f.FileType == FileType.Avatar));
+                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            return View(studentToUpdate);
                         }
-                        var avatar = new File
+                        else
                         {
-                            FileName = System.IO.Path.GetFileName(upload.FileName),
-                            FileType = FileType.Avatar,
-                            ContentType = upload.ContentType
-                        };
-                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                        {
-                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+
+                            if (studentToUpdate.Files.Any(f => f.FileType == FileType.Avatar))
+                            {
+                                db.Files.Remove(studentToUpdate.Files.First(f => f.FileType == FileType.Avatar));
+                            }
+
+                            var avatar = new File
+                            {
+                                FileName = System.IO.Path.GetFileName(upload.FileName),
+                                FileType = FileType.Avatar,
+                                ContentType = upload.ContentType
+                            };
+                            using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                            {
+                                avatar.Content = reader.ReadBytes(upload.ContentLength);
+                            }
+                            studentToUpdate.Files = new List<File> { avatar };
                         }
-                        studentToUpdate.Files = new List<File> { avatar };
                     }
                     db.Entry(studentToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
