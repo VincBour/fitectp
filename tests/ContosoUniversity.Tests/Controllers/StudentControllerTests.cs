@@ -78,5 +78,11 @@ namespace ContosoUniversity.Tests.Controllers
             Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
             Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
         }
+
+        [Test]
+        public void CheckStartHourIsBeforeEndingHour()
+        {
+            Assert.False(true);
+        }
     }
 }

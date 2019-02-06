@@ -1,7 +1,9 @@
 ﻿using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
+using ContosoUniversity.ViewModels;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -194,6 +196,43 @@ namespace ContosoUniversity.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult StudentEnrollment(int id)
+        {
+            StudentEnrollment model = new StudentEnrollment();
+            model.Student = db.Students.FirstOrDefault(s => s.ID == id);
+           
+            List<Course> CourseEnrolled = new List<Course>();
+            foreach (Enrollment item in model.Student.Enrollments)
+            {
+                CourseEnrolled.Add(db.Courses.FirstOrDefault(c => c.CourseID == item.CourseID));
+            }
+            List<int> EnrolledCoursesId = CourseEnrolled.Select(q => q.CourseID).ToList();
+
+            ViewBag.CourseID = new SelectList(db.Courses.Where(q=> !EnrolledCoursesId.Contains(q.CourseID)), "CourseID", "Title");
+            ViewBag.StudentID = db.Students.Find(id).ID;
+            return View();
+        }
+
+        // POST: Enrollments/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult StudentEnrollment([Bind(Include = "EnrollmentID,CourseID,StudentID,Grade")] Enrollment enrollment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Enrollments.Add(enrollment);
+                db.SaveChanges();
+                return RedirectToAction("Details",new { id = enrollment.StudentID });
+            }
+
+            ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title", enrollment.CourseID);
+            ViewBag.StudentID = new SelectList(db.People, "ID", "LastName", enrollment.StudentID);
+            return View(enrollment);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

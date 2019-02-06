@@ -55,8 +55,14 @@
                 }
             </table>
         </dd>
+        <dt>
+            @Html.ActionLink("New Enrollment", "StudentEnrollment", new { id = Model.ID }, htmlAttributes: new { @class = "btn btn-default" })
+        </dt>
     </dl>
 </div>
+
+<br />
+<br />
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
