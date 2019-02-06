@@ -33,7 +33,7 @@ namespace ContosoUniversity.Controllers.Api
             {
                 return NotFound();
             }
-            int i = 0;
+            //int i = 0;
             
             List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
             List<string> CoursIDListe = new List<string>();

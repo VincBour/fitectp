@@ -178,6 +178,10 @@
     <Compile Include="Migrations\201902061114405_update_db.Designer.cs">
       <DependentUpon>201902061114405_update_db.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902062234492_upd.cs" />
+    <Compile Include="Migrations\201902062234492_upd.Designer.cs">
+      <DependentUpon>201902062234492_upd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Enum\FileType.cs" />
     <Compile Include="Models\Course.cs" />
@@ -193,6 +197,7 @@
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
+    <Compile Include="ViewModels\StudentApiViewModel.cs" />
     <Compile Include="ViewModels\StudentEnrollment.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902061114405_update_db.resx">
       <DependentUpon>201902061114405_update_db.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902062234492_upd.resx">
+      <DependentUpon>201902062234492_upd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
