@@ -20,21 +20,21 @@ namespace ContosoUniversity.Migrations
             var students = new List<Student>
             {
                 new Student { FirstMidName = "Carson",   LastName = "Alexander", 
-                    EnrollmentDate = DateTime.Parse("2010-09-01") },
+                    EnrollmentDate = DateTime.Parse("2010-09-01"),Login="Carson",Password="Carson",EmailAddress="Carson@Carson.fr" },
                 new Student { FirstMidName = "Meredith", LastName = "Alonso",    
-                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),Login="Meredith",Password="Meredith",EmailAddress="Meredith@Meredith.fr" },
                 new Student { FirstMidName = "Arturo",   LastName = "Anand",     
-                    EnrollmentDate = DateTime.Parse("2013-09-01") },
+                    EnrollmentDate = DateTime.Parse("2013-09-01"),Login="Arturo",Password="Arturo",EmailAddress="Arturo@Arturo.fr" },
                 new Student { FirstMidName = "Gytis",    LastName = "Barzdukas", 
-                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),Login="Gytis",Password="Gytis",EmailAddress="Gytis@Gytis.fr"},
                 new Student { FirstMidName = "Yan",      LastName = "Li",        
-                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                    EnrollmentDate = DateTime.Parse("2012-09-01"),Login="Yan",Password="Yan",EmailAddress="Yan@Yan.fr" },
                 new Student { FirstMidName = "Peggy",    LastName = "Justice",   
-                    EnrollmentDate = DateTime.Parse("2011-09-01") },
+                    EnrollmentDate = DateTime.Parse("2011-09-01"),Login="Peggy",Password="Peggy",EmailAddress="Peggy@Peggy.fr" },
                 new Student { FirstMidName = "Laura",    LastName = "Norman",    
-                    EnrollmentDate = DateTime.Parse("2013-09-01") },
+                    EnrollmentDate = DateTime.Parse("2013-09-01"),Login="Laura",Password="Laura",EmailAddress="Laura@Laura.fr" },
                 new Student { FirstMidName = "Nino",     LastName = "Olivetto",  
-                    EnrollmentDate = DateTime.Parse("2005-09-01") }
+                    EnrollmentDate = DateTime.Parse("2005-09-01"),Login="Nino",Password="Nino",EmailAddress="Nino@Nino.fr" }
             };
 
 
@@ -44,15 +44,15 @@ namespace ContosoUniversity.Migrations
             var instructors = new List<Instructor>
             {
                 new Instructor { FirstMidName = "Kim",     LastName = "Abercrombie", 
-                    HireDate = DateTime.Parse("1995-03-11") },
+                    HireDate = DateTime.Parse("1995-03-11"),Login="Kim",Password="Kim",EmailAddress="Kim@Kim.fr"},
                 new Instructor { FirstMidName = "Fadi",    LastName = "Fakhouri",    
-                    HireDate = DateTime.Parse("2002-07-06") },
+                    HireDate = DateTime.Parse("2002-07-06"),Login="Fadi",Password="Fadi",EmailAddress="Fadi@Fadi.fr" },
                 new Instructor { FirstMidName = "Roger",   LastName = "Harui",       
-                    HireDate = DateTime.Parse("1998-07-01") },
+                    HireDate = DateTime.Parse("1998-07-01"),Login="Roger",Password="Roger",EmailAddress="Roger@Roger.fr" },
                 new Instructor { FirstMidName = "Candace", LastName = "Kapoor",      
-                    HireDate = DateTime.Parse("2001-01-15") },
+                    HireDate = DateTime.Parse("2001-01-15"),Login="Candace",Password="Candace",EmailAddress="Candace@Candace.fr"},
                 new Instructor { FirstMidName = "Roger",   LastName = "Zheng",      
-                    HireDate = DateTime.Parse("2004-02-12") }
+                    HireDate = DateTime.Parse("2004-02-12"),Login="Roger",Password="Roger",EmailAddress="Roger@Roger.fr" }
             };
             instructors.ForEach(s => context.Instructors.AddOrUpdate(p => p.LastName, s));
             context.SaveChanges();

@@ -1,0 +1,19 @@
+﻿@if (Session["ID"]!= null)
+{
+    if (Session["Type"].ToString() == "Student")
+    {
+        <li>
+            @Html.ActionLink("Students", "Index", "Student")
+        </li>
+    }
+    else
+    {
+      
+            <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
+ 
+
+
+
+    }
+}
+

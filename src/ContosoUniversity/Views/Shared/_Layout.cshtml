@@ -32,14 +32,14 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Students", "Index", "Student")</li>
+                    @Html.Partial("_StudentOrInstructor")
                     <li>@Html.ActionLink("Courses", "Index", "Course")</li>
-                    <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
+
                     <li>@Html.ActionLink("Departments", "Index", "Department")</li>
                     <li><a class="btn btn-dark pull-right" href="@Html.ActionLink("Register", "CreateUser", "Home")" role="button"></a></li>
                     <li>@Html.ActionLink("Lessons", "Index", "CourseSessions")</li>
                 </ul>
-                
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
