@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,15 @@ namespace ContosoUniversity.Controle
             }
             return testExt;
         }
-
+        bool testSize = false;
+        public bool checkSize(FileInfo fileInfo)
+        {
+            long sizeImg = fileInfo.Length;
+            if (sizeImg<100000)
+            {
+                testSize = true;
+            }
+            return testSize;
+        }
     }
 }
