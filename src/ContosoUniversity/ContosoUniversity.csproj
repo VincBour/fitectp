@@ -116,6 +116,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthenticateController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -175,6 +176,10 @@
     <Compile Include="Migrations\201902060929500_Update_dbo_Person_v4.Designer.cs">
       <DependentUpon>201902060929500_Update_dbo_Person_v4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902061327304_up.cs" />
+    <Compile Include="Migrations\201902061327304_up.Designer.cs">
+      <DependentUpon>201902061327304_up.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Department.cs" />
@@ -187,6 +192,7 @@
     <Compile Include="ViewModels\AssignedCourseData.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
+    <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
@@ -256,9 +262,11 @@
     <Content Include="Views\Home\Authenticate.cshtml" />
     <Content Include="Views\Home\CreateUser.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_StudentOrInstructor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Authenticate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -297,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902060929500_Update_dbo_Person_v4.resx">
       <DependentUpon>201902060929500_Update_dbo_Person_v4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902061327304_up.resx">
+      <DependentUpon>201902061327304_up.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

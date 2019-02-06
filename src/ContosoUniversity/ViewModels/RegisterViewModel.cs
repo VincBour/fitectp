@@ -7,6 +7,11 @@ using System.Web;
 
 namespace ContosoUniversity.ViewModels
 {
+    public enum TypeofPerson
+    {
+        Student=1,
+        Instructor=2
+    }
 	public class RegisterViewModel
 	{
         public int ID { get; set; }
@@ -20,6 +25,9 @@ namespace ContosoUniversity.ViewModels
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
+        [Display(Name ="Are you a Student or a Instructor")]
+        public TypeofPerson Type { get; set; }
+
         [Required]
         public string Login { get; set; }
 
@@ -37,8 +45,8 @@ namespace ContosoUniversity.ViewModels
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [DataType(DataType.EmailAddress)]
+        //[Required(ErrorMessage = "Email is required")]
+        //[DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
     }
 }

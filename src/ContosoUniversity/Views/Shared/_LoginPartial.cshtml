@@ -1,4 +1,4 @@
-﻿@if (Request.IsAuthenticated)
+﻿@if (Session["ID"]!=null)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -6,9 +6,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Bonjour " + "Instructo/Student" + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Bonjour " + Session["Login"] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+            <li>@Html.ActionLink("LogOut", "LogOut", "Authenticate", routeValues: null, htmlAttributes: new { id = "LogOutLink" })</li>
         </ul>
     }
 }
