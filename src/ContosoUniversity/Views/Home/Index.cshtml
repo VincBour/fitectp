@@ -1,10 +1,18 @@
-﻿@{
+﻿@model ContosoUniversity.Models.Person
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Contoso University</h1>
 </div>
+
+<div>
+    @Html.ActionLink("To access your personal account, authenticate yourself ", "Authenticate", "Home")
+    <br /><br />
+    @Html.ActionLink("Register yourself to have a personal account", "CreateUser", "Home")
+</div>
+
 <div class="row">
     <div class="col-md-4">
         <h2>Welcome to Contoso University</h2>

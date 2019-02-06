@@ -17,6 +17,7 @@ namespace ContosoUniversity.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
+        #region Methods preexisting
         // GET: Instructor
         public ActionResult Index(int? id, int? courseID)
         {
@@ -259,5 +260,7 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
