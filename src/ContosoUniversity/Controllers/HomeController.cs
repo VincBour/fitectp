@@ -178,7 +178,7 @@ namespace ContosoUniversity.Controllers
         /// <returns>add a new student or a new instructor depending of the type selected by the user</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateUser(string login, string password, string password2, string selecttype, string lastname, string firstmidname, string emailaddress, DateTime hiredate)
+        public ActionResult CreateUser(string login, string password, string confirmPassword, string selecttype, string lastname, string firstmidname, string emailaddress, DateTime hiredate)
         {
             List<Person> person = new List<Person>();
             person = db.People.ToList();
@@ -194,7 +194,7 @@ namespace ContosoUniversity.Controllers
                 ViewBag.PasswordNull = "Password is required";
                 return View();
             }
-            else if (password2 == null)
+            else if (confirmPassword == null)
             {
                 ViewBag.Password2Null = "Confirm your password";
                 return View();
@@ -220,7 +220,7 @@ namespace ContosoUniversity.Controllers
                 ViewBag.LoginNotAvailable = "This login already exists.";
                 return View();
             }
-            else if (password != password2)
+            else if (password != confirmPassword)
             {
                 ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
                 return View();
