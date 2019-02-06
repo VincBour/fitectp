@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201902051956089_Update_dbo_Person.Designer.cs">
       <DependentUpon>201902051956089_Update_dbo_Person.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902061010549_update_db.cs" />
+    <Compile Include="Migrations\201902061010549_update_db.Designer.cs">
+      <DependentUpon>201902061010549_update_db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Enum\FileType.cs" />
     <Compile Include="Models\Course.cs" />
@@ -277,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902051956089_Update_dbo_Person.resx">
       <DependentUpon>201902051956089_Update_dbo_Person.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902061010549_update_db.resx">
+      <DependentUpon>201902061010549_update_db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
