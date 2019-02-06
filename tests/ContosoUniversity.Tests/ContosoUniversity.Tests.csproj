@@ -184,6 +184,7 @@
     <Compile Include="Controllers\InstructorControllerTests.cs" />
     <Compile Include="Controllers\CourseSessionControllerTests.cs" />
     <Compile Include="Controllers\StudentControllerTests.cs" />
+    <Compile Include="Controllers\StudentEnrollmentControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\EntityGenerator.cs" />
     <Compile Include="Tools\FormDataHelper.cs" />
