@@ -113,24 +113,26 @@ namespace ContosoUniversity.Controllers
         [HttpPost]
         public ActionResult Authenticate(string login, string password/*UserViewModel viewModel, string returnUrl*/)
         {
-            // check login and password are completed
-            if (login == string.Empty)
-            {
-                ViewBag.LoginNull = "Login is required";
-                return View();
-            }
-            else if (password == string.Empty)
-            {
-                ViewBag.PasswordNull = "Password is required";
-                return View();
-            }
+            string passwordHash = EncodeMD5(password);
+            //// check login and password are completed
+            //if (login == string.Empty)
+            //{
+            //    ViewBag.LoginNull = "Login is required";
+            //    return View();
+            //}
+            //else if (password == string.Empty)
+            //{
+            //    ViewBag.PasswordNull = "Password is required";
+            //    return View();
+            //}
+
             //check user exists and password is correct
-            else if (db.People.Any(p => p.Login == login))
+            if (db.People.Any(p => p.Login == login))
             {
-                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password);
+                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == passwordHash);
                 if (user == null)
                 {
-                    ViewBag.PasswordFalse = "Passworld wrong.";
+                    ViewBag.PasswordFalse = "Password wrong.";
                     return View();
                 }
                 else
@@ -244,17 +246,18 @@ namespace ContosoUniversity.Controllers
             //return View(viewModel);
 
             //Verification fields not null
-            if (login == null)
-            {
-                ViewBag.LoginNull = "Login is required";
-                return View();
-            }
-            else if (password == null)
-            {
-                ViewBag.PasswordNull = "Password is required";
-                return View();
-            }
-            else if (confirmPassword == null)
+            //if (login == null)
+            //{
+            //    ViewBag.LoginNull = "Login is required";
+            //    return View();
+            //}
+            //else if (password == null)
+            //{
+            //    ViewBag.PasswordNull = "Password is required";
+            //    return View();
+            //}
+            //else
+            if (confirmPassword == null)
             {
                 ViewBag.Password2Null = "Confirm your password";
                 return View();
@@ -280,11 +283,11 @@ namespace ContosoUniversity.Controllers
                 ViewBag.LoginNotAvailable = "This login already exists.";
                 return View();
             }
-            else if (password != confirmPassword)
-            {
-                ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
-                return View();
-            }
+            //else if (password != confirmPassword)
+            //{
+            //    ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
+            //    return View();
+            //}
             //creation of a new user
             else
             {
@@ -297,7 +300,7 @@ namespace ContosoUniversity.Controllers
                         EnrollmentDate = DateTime.Now,
                         EmailAddress = emailaddress,
                         Login = login,
-                        Password = password
+                        Password = EncodeMD5(password)
                     };
                     db.Students.Add(student);
                     db.SaveChanges();
@@ -314,7 +317,7 @@ namespace ContosoUniversity.Controllers
                         HireDate = hiredate,
                         EmailAddress = emailaddress,
                         Login = login,
-                        Password = password
+                        Password = EncodeMD5(password)
                     };
                     db.Instructors.Add(instructor);
                     db.SaveChanges();

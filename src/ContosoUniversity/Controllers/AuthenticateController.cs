@@ -8,12 +8,15 @@ namespace ContosoUniversity.Controllers
 {
     public class AuthenticateController : Controller
     {
-        // GET: Authenticate
+
+
+        #region logOut
         public ActionResult LogOut()
         {
             Session.RemoveAll();
             Session.Clear();
             return RedirectToAction("Index","Home");
         }
+        #endregion
     }
 }
