@@ -46,5 +46,29 @@ namespace ContosoUniversity.Tests.Controllers
 
             Assert.True(true);
         }
+        [Test]
+        public void ImageSize_100kbOrLess_Succes()
+        {
+
+            Assert.True(true);
+        }
+        [Test]
+        public void ImageType_Jpg_Succes()
+        {
+
+            Assert.True(true);
+        }
+        [Test]
+        public void ImageType_Tif_Fail()
+        {
+
+            Assert.True(true);
+        }
+        [Test]
+        public void ImageType_png_Succes()
+        {
+
+            Assert.True(true);
+        }
     }
 }
