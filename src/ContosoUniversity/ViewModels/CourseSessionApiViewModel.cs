@@ -4,6 +4,10 @@ using ContosoUniversity.Models;
 
 namespace ContosoUniversity.ViewModels
 {
+    /// <summary>
+    /// This ViewModel is used for instructor Api service which returns the courseId, DayOfWeek, Hour and Duration of the course session
+    /// </summary>
+   
     public class CourseSessionApiViewModel
     {
         public int CourseID { get; set; }

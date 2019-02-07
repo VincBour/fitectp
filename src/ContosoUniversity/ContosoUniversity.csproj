@@ -207,7 +207,7 @@
     <Compile Include="ViewModels\InstructorIndexData.cs" />
     <Compile Include="ViewModels\StudentApiViewModel.cs" />
     <Compile Include="ViewModels\StudentEnrollment.cs" />
-    <Compile Include="ViewModels\InstructorsViewModel.cs" />
+    <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>

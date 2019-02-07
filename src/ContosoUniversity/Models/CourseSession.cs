@@ -33,7 +33,7 @@ namespace ContosoUniversity.Models
         [Required]
         public int Duration
         {
-            get { return HourEnd - HourStart; }
+            get { return (HourEnd - HourStart)*60; } //to display duration in minutes
         }
 
         #endregion
