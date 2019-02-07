@@ -159,13 +159,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902050857325_Add_dbo_CourseSession_V1.cs" />
-    <Compile Include="Migrations\201902050857325_Add_dbo_CourseSession_V1.Designer.cs">
-      <DependentUpon>201902050857325_Add_dbo_CourseSession_V1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902061114405_update_db.cs" />
-    <Compile Include="Migrations\201902061114405_update_db.Designer.cs">
-      <DependentUpon>201902061114405_update_db.cs</DependentUpon>
+    <Compile Include="Migrations\201902071203061_newdb.cs" />
+    <Compile Include="Migrations\201902071203061_newdb.Designer.cs">
+      <DependentUpon>201902071203061_newdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Enum\FileType.cs" />
@@ -283,11 +279,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902050857325_Add_dbo_CourseSession_V1.resx">
-      <DependentUpon>201902050857325_Add_dbo_CourseSession_V1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902061114405_update_db.resx">
-      <DependentUpon>201902061114405_update_db.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902071203061_newdb.resx">
+      <DependentUpon>201902071203061_newdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

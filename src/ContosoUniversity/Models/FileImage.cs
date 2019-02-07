@@ -8,7 +8,7 @@ namespace ContosoUniversity.Models
 {
     public class FileImage
     {
-        public int FileId { get; set; }
+        public int ID { get; set; }
         [StringLength(255)]
         public string FileName { get; set; }
         [StringLength(100)]
