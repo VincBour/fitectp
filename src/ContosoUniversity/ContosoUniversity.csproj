@@ -126,12 +126,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessClass\CheckImage.cs" />
     <Compile Include="BusinessClass\ErrorMessages.cs" />
-    <Compile Include="Controle\CheckImage.cs" />
     <Compile Include="Controllers\Api\InstructorsController.cs" />
     <Compile Include="Controllers\Api\StudentsController.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
-    <Compile Include="BusinessClass\CheckImage.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\CourseSessionsController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -145,6 +144,7 @@
     <Compile Include="DAL\SchoolInterceptorLogging.cs" />
     <Compile Include="DAL\SchoolInterceptorTransientErrors.cs" />
     <Compile Include="Enum\Day.cs" />
+    <Compile Include="Enum\TypeOfPerson.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,5 +1,4 @@
 ﻿using ContosoUniversity.BusinessClass;
-using ContosoUniversity.Controle;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;

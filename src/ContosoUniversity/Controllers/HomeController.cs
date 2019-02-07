@@ -13,7 +13,7 @@ using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
-    [AllowAnonymous]
+
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -62,139 +62,12 @@ namespace ContosoUniversity.Controllers
             base.Dispose(disposing);
         }
         #endregion
-        #region User
-        public Person obtainPerson(int id)
-        {
-            return db.People.FirstOrDefault(p => p.ID == id);
-        }
-
-        public Person obtainPerson(string idStr)
-        {
-            int id;
-            if (int.TryParse(idStr, out id))
-            {
-                return obtainPerson(id);
-            }
-            return null;
-        }
-        public Person checkUser(string login, string password)
-        {
-            string passwordEncode = EncodeMD5(password);
-            return db.People.FirstOrDefault(p => p.Login == login && p.Password == passwordEncode);
-        }
-        #region Encode
-
-        private string EncodeMD5(string password)
-        {
-            string passwordCode = "ContoseUniversity" + password + "devnet";
-            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordCode)));
-        }
-        #endregion
-        #endregion
-
-        #region Authentication
-
-        /// <summary>
-        /// This httpget action is called from homepage to authentication
-        /// </summary>
-        /// <returns>View(Form to enter his long and password)</returns>
-        [HttpGet]
-        public ActionResult Authenticate()
-        {
-            UserViewModel viewModel = new UserViewModel { Authenticate = HttpContext.User.Identity.IsAuthenticated };
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                viewModel.Person = obtainPerson(HttpContext.User.Identity.Name);
-            }
-            return View(viewModel);
-        }
-
-        /// <summary>
-        /// This httpost action compares the login and the password with the database to authenticate the user
-        /// </summary>
-        /// <param name="login"></param>
-        /// <param name="password"></param>
-        /// <returns>if validation: View(Home)</returns>
-        [HttpPost]
-        public ActionResult Authenticate(string login, string password/*UserViewModel viewModel, string returnUrl*/)
-        {
-            //string passwordHash = EncodeMD5(password);
-            //// check login and password are completed
-            //if (login == string.Empty)
-            //{
-            //    ViewBag.LoginNull = "Login is required";
-            //    return View();
-            //}
-            //else if (password == string.Empty)
-            //{
-            //    ViewBag.PasswordNull = "Password is required";
-            //    return View();
-            //}
-
-            //check user exists and password is correct
-            if (db.People.Any(p => p.Login == login))
-            {
-                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password/*Hash*/);
-                if (user == null)
-                {
-                    ViewBag.ErrorMessageAuthenticate = "Invalid login or password.";
-                    return View();
-                }
-                else
-                {
-                    Session["ID"] = user.ID.ToString();
-                    Session["Login"] = user.Login.ToString();
-                    if ((db.Students.FirstOrDefault(p=>p.ID==user.ID))!=null)
-                    {
-                        Session["Type"] = "Student";
-                    }
-                    else
-                    {
-                        Session["Type"] = "Instructor";
-                    }
-                    
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-            else
-            {
-                ViewBag.LoginWrong = "Login not found.";
-                return View();
-            }
-            //if (ModelState.IsValid)
-            //{
-            //    Person person = checkUser(viewModel.Person.Login, viewModel.Person.Password);
-            //    if (person != null)
-            //    {
-            //        FormsAuthentication.SetAuthCookie(person.ID.ToString(), false);
-            //        if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
-            //        {
-            //            return Redirect(returnUrl);
-            //        }
-            //        return Redirect("/");
-            //    }
-            //    ModelState.AddModelError("User", "Login or password wrong");
-            //}
-            //return View(viewModel);
-        }
-        #endregion
-
-        #region Register a new user
+    }
+}
 
 
-        /// <summary>
-        /// This httpget action is called from homepage and authenticationView in order to create a new user
-        /// </summary>
-        /// <returns>View(form with user informations)</returns>
-        [HttpGet]
-        public ActionResult CreateUser()
-        {
-            return View();
-        }
 
 
-        
-    
 
 
 

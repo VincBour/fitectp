@@ -28,71 +28,71 @@ namespace ContosoUniversity.Tests.Controllers
             controllerToTest.DbContext = dbContext;
         }
 
-        #region Authenticate Tests
-        [Test]
-        public void Authenticate_ValidUser_Success()
-        {
-            //Arrange
-            string expectedlogin = "login";
-            string expectedpassword = "password";
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
-            //Act
-            var result = controllerToTest.Authenticate(expectedlogin, expectedpassword) as RedirectToRouteResult;
-            //Assert
-            Assert.AreEqual("Index", result.RouteValues["action"]);
-            Assert.IsNull(result.RouteValues["controller"]); //Assert.AreEqual("Student", result.RouteValues["controller"]);
-        }
+        //#region Authenticate Tests
+        //[Test]
+        //public void Authenticate_ValidUser_Success()
+        //{
+        //    //Arrange
+        //    string expectedlogin = "login";
+        //    string expectedpassword = "password";
+        //    EntityGenerator generator = new EntityGenerator(dbContext);
+        //    Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
+        //    //Act
+        //    var result = controllerToTest.Authenticate(expectedlogin, expectedpassword) as RedirectToRouteResult;
+        //    //Assert
+        //    Assert.AreEqual("Index", result.RouteValues["action"]);
+        //    Assert.IsNull(result.RouteValues["controller"]); //Assert.AreEqual("Student", result.RouteValues["controller"]);
+        //}
 
-        [Test]
-        public void Authenticate_WrongPassword_AlertWrongPassword()
-        {
-            //Arrange
-            string expectedlogin = "login";
-            string expectedpassword = "password";
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
-            //Act
-            RedirectToRouteResult result = controllerToTest.Authenticate("login", "wrong") as RedirectToRouteResult;
-            //Assert
-            Assert.AreEqual("Authenticate", result.RouteValues["action"]);
-            Assert.IsNull(result.RouteValues["controller"]);
-        }
+        //[Test]
+        //public void Authenticate_WrongPassword_AlertWrongPassword()
+        //{
+        //    //Arrange
+        //    string expectedlogin = "login";
+        //    string expectedpassword = "password";
+        //    EntityGenerator generator = new EntityGenerator(dbContext);
+        //    Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
+        //    //Act
+        //    RedirectToRouteResult result = controllerToTest.Authenticate("login", "wrong") as RedirectToRouteResult;
+        //    //Assert
+        //    Assert.AreEqual("Authenticate", result.RouteValues["action"]);
+        //    Assert.IsNull(result.RouteValues["controller"]);
+        //}
 
-        [Test]
-        public void Authenticate_LoginOrPasswordEmpty_AlertNull()
-        {
-            //Arrange
-            string expectedlogin = "login";
-            string expectedpassword = "password";
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
-            //Act
-            RedirectToRouteResult result = controllerToTest.Authenticate(null, "password") as RedirectToRouteResult;
-            RedirectToRouteResult result2 = controllerToTest.Authenticate("login", null) as RedirectToRouteResult;
-            //Assert
-            Assert.AreEqual("Authenticate", result.RouteValues["action"]);
-            Assert.AreEqual("Authenticate", result2.RouteValues["action"]);
-            Assert.IsNull(result.RouteValues["controller"]);
-            Assert.IsNull(result2.RouteValues["controller"]);
-        }
+        //[Test]
+        //public void Authenticate_LoginOrPasswordEmpty_AlertNull()
+        //{
+        //    //Arrange
+        //    string expectedlogin = "login";
+        //    string expectedpassword = "password";
+        //    EntityGenerator generator = new EntityGenerator(dbContext);
+        //    Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
+        //    //Act
+        //    RedirectToRouteResult result = controllerToTest.Authenticate(null, "password") as RedirectToRouteResult;
+        //    RedirectToRouteResult result2 = controllerToTest.Authenticate("login", null) as RedirectToRouteResult;
+        //    //Assert
+        //    Assert.AreEqual("Authenticate", result.RouteValues["action"]);
+        //    Assert.AreEqual("Authenticate", result2.RouteValues["action"]);
+        //    Assert.IsNull(result.RouteValues["controller"]);
+        //    Assert.IsNull(result2.RouteValues["controller"]);
+        //}
 
-        [Test]
-        public void Authenticate_LoginNoExist_AlertNotAvailableLogin()
-        {
-            //Arrange
-            string expectedlogin = "login";
-            string expectedpassword = "password";
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
-            string noExistingLogin = "jkbrgmhgxfgsdvnklbljvddklsdv";
-            //Act
-            RedirectToRouteResult result = controllerToTest.Authenticate(noExistingLogin, "password") as RedirectToRouteResult;
-            //Assert
-            Assert.AreEqual("Authenticate", result.RouteValues["action"]);
-            Assert.IsNull(result.RouteValues["controller"]);
-        }
-        #endregion
+        //[Test]
+        //public void Authenticate_LoginNoExist_AlertNotAvailableLogin()
+        //{
+        //    //Arrange
+        //    string expectedlogin = "login";
+        //    string expectedpassword = "password";
+        //    EntityGenerator generator = new EntityGenerator(dbContext);
+        //    Student student = generator.CreateStudentUser(expectedlogin, expectedpassword);
+        //    string noExistingLogin = "jkbrgmhgxfgsdvnklbljvddklsdv";
+        //    //Act
+        //    RedirectToRouteResult result = controllerToTest.Authenticate(noExistingLogin, "password") as RedirectToRouteResult;
+        //    //Assert
+        //    Assert.AreEqual("Authenticate", result.RouteValues["action"]);
+        //    Assert.IsNull(result.RouteValues["controller"]);
+        //}
+        //#endregion
 
         #region CreateUser Tests
         //        [Test]

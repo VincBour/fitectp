@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ContosoUniversity.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,11 +8,7 @@ using System.Web;
 
 namespace ContosoUniversity.ViewModels
 {
-    public enum TypeofPerson
-    {
-        Student=1,
-        Instructor=2
-    }
+    
 	public class RegisterViewModel
 	{
         public int ID { get; set; }
@@ -26,7 +23,7 @@ namespace ContosoUniversity.ViewModels
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
         [Display(Name ="Are you a Student or a Instructor")]
-        public TypeofPerson Type { get; set; }
+        public TypeOfPerson Type { get; set; }
 
         [Required]
         public string Login { get; set; }

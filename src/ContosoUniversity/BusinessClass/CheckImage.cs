@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace ContosoUniversity.Controle
+namespace ContosoUniversity.BusinessClass
 {
     public class CheckImage
     {
@@ -20,14 +20,14 @@ namespace ContosoUniversity.Controle
             if (typeFile == ".png" || typeFile == ".jpeg" || typeFile == ".jpg")
             {
                 testExt = true;
-        
+
             }
             return testExt;
         }
         bool testSize = false;
         public bool checkSize(long fileSize)
         {
-            
+
             if (fileSize < 100000)
             {
                 testSize = true;
