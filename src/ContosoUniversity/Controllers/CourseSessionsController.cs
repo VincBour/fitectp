@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ContosoUniversity.BusinessClass;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 
@@ -62,7 +63,7 @@ namespace ContosoUniversity.Controllers
                     {
                         ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
                         ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
-                        ViewBag.ErrorMessage = "you have already this course";
+                        ViewBag.ErrorMessage = ErrorMessages.ErrorMessageSameCourse();
                         return View();
                     }
                 }
@@ -70,9 +71,17 @@ namespace ContosoUniversity.Controllers
                 {
                     ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
                     ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
-                    ViewBag.ErrorMessageTime = "Time can't be negative";
+                    ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNegativeTime();
                     return View();
                 }
+                if(courseSession.DayOfWeek.ToString() != courseSession.DateTime.DayOfWeek.ToString())
+                {
+                    ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
+                    ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                    ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNotSameDay();
+                    return View();
+                }
+
                 db.CourseSessions.Add(courseSession);
                 db.SaveChanges();
                 return RedirectToAction("Index");
