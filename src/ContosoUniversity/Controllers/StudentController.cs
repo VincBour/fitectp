@@ -191,7 +191,7 @@ namespace ContosoUniversity.Controllers
                 {
                     if (upload != null && upload.ContentLength > 0)
                     {
-                        string typeFile = Path.GetExtension(upload.FileName);
+                        //string typeFile = Path.GetExtension(upload.FileName);
                         CheckImage check = new CheckImage();
                         //getting the image
                         string fileName = System.IO.Path.GetExtension(upload.FileName);
@@ -202,7 +202,8 @@ namespace ContosoUniversity.Controllers
                         if (extensionIsTrue == false)
                         {
                             ViewBag.ErrorType = "Image extention authorized is png or jpeg";
-                            return View();
+                            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
+                            return View(student);
                         }
 
                         //call of the verfication Size method
@@ -211,7 +212,8 @@ namespace ContosoUniversity.Controllers
                         if (sizeIsCorrect == false)
                         {
                             ViewBag.ErrorSize = "The size of the image is limited to 100kb";
-                            return View();
+                            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
+                            return View(student);
                         }
 
                         if (studentToUpdate.Files.Any(f => f.FileType == FileType.Avatar))

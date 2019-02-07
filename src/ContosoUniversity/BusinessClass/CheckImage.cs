@@ -24,7 +24,7 @@ namespace ContosoUniversity.Controle
             }
             return testExt;
         }
-        bool testSize = true;
+        bool testSize = false;
         public bool checkSize(long fileSize)
         {
             

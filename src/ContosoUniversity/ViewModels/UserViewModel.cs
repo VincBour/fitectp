@@ -10,8 +10,7 @@ namespace ContosoUniversity.ViewModels
 {
     public class UserViewModel
     {
-        public Person Person { get; set; }
-        public bool Authenticate { get; set; }
+        
 
                
         [Required]
@@ -21,14 +20,6 @@ namespace ContosoUniversity.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm Password is required")]
-        [DataType(DataType.Password)]
-        [Compare("Password",ErrorMessage ="Confirm Passwor and Password do not Match")]
-        public string ConfirmPassword { get; set; }
-
-
-        [Required(ErrorMessage = "Email is required")]
-        [DataType(DataType.EmailAddress)]
-        public string EmailAddress { get; set; }
+        
     }
 }
