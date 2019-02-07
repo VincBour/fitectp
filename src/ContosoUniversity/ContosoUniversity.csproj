@@ -257,10 +257,11 @@
     <Content Include="Views\Home\CreateUser.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_StudentOrInstructor.cshtml" />
+    <Content Include="Views\Authenticate\Authenticate.cshtml" />
+    <Content Include="Views\Authenticate\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Authenticate\" />
     <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>

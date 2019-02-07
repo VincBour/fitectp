@@ -1,4 +1,4 @@
-﻿@if (Session["ID"]!= null)
+﻿@if (Session["ID"] != null)
 {
     if (Session["Type"].ToString() == "Student")
     {
@@ -8,9 +8,11 @@
     }
     else
     {
-      
-            <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
- 
+
+        <li>@Html.ActionLink("Instructors", "Index", "Instructor")</li>
+        <li>@Html.ActionLink("Lessons", "Index", "CourseSessions")</li>
+        <li>@Html.ActionLink("Courses", "Index", "Course")</li>
+
 
 
 
