@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace ContosoUniversity.Models
 {
@@ -33,16 +31,19 @@ namespace ContosoUniversity.Models
         [Range(9, 19)]
         public int HourEnd { get; set; }
         [Required]
-        public int Time
+        public int Duration
         {
-            get { return HourEnd - HourStart; }
+            get { return (HourEnd - HourStart)*60; } //to display duration in minutes
         }
+
         #endregion
 
         #region Navigation
         public virtual Course CourseIDNavigation { get; set; }
         public virtual Instructor InstructorIDNavigation { get; set; }
         public virtual IEnumerable<Enrollment> Enrollment { get; set; }
+
+
         #endregion
     }
 }

@@ -127,6 +127,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessClass\ErrorMessages.cs" />
+    <Compile Include="Controle\CheckImage.cs" />
+    <Compile Include="Controllers\Api\InstructorsController.cs" />
+    <Compile Include="Controllers\Api\StudentsController.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\InstructorsController.cs" />
     <Compile Include="Controllers\Api\StudentsController.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
@@ -193,9 +197,12 @@
     <Compile Include="ViewModels\CourseSessionApiViewModel.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
     <Compile Include="ViewModels\InstructorApiViewModel.cs" />
+    <Compile Include="ViewModels\CourseSessionApiViewModel.cs" />
+    <Compile Include="ViewModels\InstructorApiViewModel.cs" />
     <Compile Include="ViewModels\InstructorIndexData.cs" />
     <Compile Include="ViewModels\StudentApiViewModel.cs" />
     <Compile Include="ViewModels\StudentEnrollment.cs" />
+    <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
