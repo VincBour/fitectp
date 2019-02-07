@@ -160,9 +160,9 @@
     <Compile Include="Migrations\201411022351064_Inheritance.Designer.cs">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902071203061_newdb.cs" />
-    <Compile Include="Migrations\201902071203061_newdb.Designer.cs">
-      <DependentUpon>201902071203061_newdb.cs</DependentUpon>
+    <Compile Include="Migrations\201902071525410_Update1.cs" />
+    <Compile Include="Migrations\201902071525410_Update1.Designer.cs">
+      <DependentUpon>201902071525410_Update1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Enum\FileType.cs" />
@@ -260,8 +260,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\File\" />
     <Folder Include="Views\Authenticate\" />
+    <Folder Include="Views\File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -286,8 +286,8 @@
     <EmbeddedResource Include="Migrations\201411022351064_Inheritance.resx">
       <DependentUpon>201411022351064_Inheritance.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902071203061_newdb.resx">
-      <DependentUpon>201902071203061_newdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902071525410_Update1.resx">
+      <DependentUpon>201902071525410_Update1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
