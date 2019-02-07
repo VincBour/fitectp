@@ -17,8 +17,17 @@ namespace ContosoUniversity.Models
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
+        [Required]
         public string Login { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+        
+        
+
+        [Required(ErrorMessage ="Email is required")]
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
         
         [Display(Name = "Full Name")]
