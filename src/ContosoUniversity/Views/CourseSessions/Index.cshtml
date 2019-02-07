@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
+            @Html.DisplayNameFor(model => model.Duration)
         </th>
         <th></th>
     </tr>
@@ -44,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.DateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Time) Hours
+            @Html.DisplayFor(modelItem => item.Duration) Hours
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

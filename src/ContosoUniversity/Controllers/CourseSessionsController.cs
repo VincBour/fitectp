@@ -66,7 +66,7 @@ namespace ContosoUniversity.Controllers
                         return View();
                     }
                 }
-                if (courseSession.HourEnd - courseSession.HourStart < 0)
+                if ((courseSession.Duration) < 0)
                 {
                     ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
                     ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");

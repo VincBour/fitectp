@@ -28,5 +28,21 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.Students.Add(student);
             return student;
         }
+        //Used to Authentication tests
+        public Student CreateStudentUser(string login, string password)
+        {
+            Student student = new Student()
+            {
+                FirstMidName = "firstmidname",
+                LastName = "lastname",
+                EnrollmentDate = DateTime.Now,
+                EmailAddress = "email@address.com",
+                Login = login,
+                Password = password
+            };
+
+            this.dbContext.Students.Add(student);
+            return student;
+        }
     }
 }
