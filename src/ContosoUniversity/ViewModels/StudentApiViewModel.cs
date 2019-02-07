@@ -15,7 +15,7 @@ namespace ContosoUniversity.ViewModels
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        //public List<Enrollment> ListEnrollment { get; set; }
+        
         public List<string> ListCourseID { get; set; }
     }
 }

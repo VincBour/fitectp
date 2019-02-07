@@ -113,7 +113,7 @@ namespace ContosoUniversity.Controllers
         [HttpPost]
         public ActionResult Authenticate(string login, string password/*UserViewModel viewModel, string returnUrl*/)
         {
-            string passwordHash = EncodeMD5(password);
+            //string passwordHash = EncodeMD5(password);
             //// check login and password are completed
             //if (login == string.Empty)
             //{
@@ -129,10 +129,10 @@ namespace ContosoUniversity.Controllers
             //check user exists and password is correct
             if (db.People.Any(p => p.Login == login))
             {
-                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == passwordHash);
+                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password/*Hash*/);
                 if (user == null)
                 {
-                    ViewBag.PasswordFalse = "Password wrong.";
+                    ViewBag.ErrorMessageAuthenticate = "Invalid login or password.";
                     return View();
                 }
                 else
