@@ -24,11 +24,11 @@ namespace ContosoUniversity.Controle
             }
             return testExt;
         }
-        bool testSize = false;
-        public bool checkSize(FileInfo fileInfo)
+        bool testSize = true;
+        public bool checkSize(long fileSize)
         {
-            long sizeImg = fileInfo.Length;
-            if (sizeImg<100000)
+            
+            if (fileSize < 100000)
             {
                 testSize = true;
             }
