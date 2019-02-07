@@ -28,6 +28,17 @@ namespace ContosoUniversity.Tests.Tools
             this.dbContext.Students.Add(student);
             return student;
         }
+        public Instructor CreateInstructor(string lastname, string firstname)
+        {
+            var instructor = new Instructor()
+            {
+                LastName = lastname,
+                FirstMidName = firstname
+            };
+            this.dbContext.Instructors.Add(instructor);
+            return instructor;
+        }
+
         //Used to Authentication tests
         public Student CreateStudentUser(string login, string password)
         {
@@ -43,6 +54,21 @@ namespace ContosoUniversity.Tests.Tools
 
             this.dbContext.Students.Add(student);
             return student;
+        }
+
+        //Used to Authentication tests
+        public Instructor CreateInstructorUser(string login, string password)
+        {
+            var instructor = new Instructor
+            {
+                LastName = "lastName",
+                FirstMidName = "firstMidName",
+                Login = login,
+                Password = password,
+                HireDate = DateTime.Now
+            };
+            this.dbContext.Instructors.Add(instructor);
+                return instructor;
         }
     }
 }

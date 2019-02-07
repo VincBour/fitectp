@@ -27,15 +27,15 @@ namespace ContosoUniversity.Tests.Controllers
         }
 
         [Test]
-        public void GetDetails_ValidStudent_Success()
+        public void GetDetails_ValidInstructor_Success()
         {
             string expectedLastName = "Dubois";
             string expectedFirstName = "George";
 
             EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudent(expectedLastName, expectedFirstName);
+            Instructor instructor = generator.CreateInstructor(expectedLastName, expectedFirstName);
 
-            var result = controllerToTest.Details(student.ID) as ViewResult;
+            var result = controllerToTest.Details(instructor.ID) as ViewResult;
             var resultModel = result.Model as Student;
 
             Assert.That(result, Is.Not.Null);

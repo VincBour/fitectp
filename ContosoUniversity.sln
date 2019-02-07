@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BA3246
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Tests", "tests\ContosoUniversity.Tests\ContosoUniversity.Tests.csproj", "{1D884AE3-DE94-435F-A5D0-98C0EF9E6610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestProject1", "NUnitTestProject1\NUnitTestProject1.csproj", "{BD19540D-C2F5-4217-86EC-66EABFEBB47B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{1D884AE3-DE94-435F-A5D0-98C0EF9E6610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D884AE3-DE94-435F-A5D0-98C0EF9E6610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D884AE3-DE94-435F-A5D0-98C0EF9E6610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD19540D-C2F5-4217-86EC-66EABFEBB47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD19540D-C2F5-4217-86EC-66EABFEBB47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD19540D-C2F5-4217-86EC-66EABFEBB47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD19540D-C2F5-4217-86EC-66EABFEBB47B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
