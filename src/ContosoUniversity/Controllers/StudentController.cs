@@ -1,13 +1,17 @@
-﻿using ContosoUniversity.DAL;
+﻿using ContosoUniversity.Controle;
+using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ContosoUniversity.Controllers
@@ -21,6 +25,7 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        #region Methods preexisting
         // GET: Student
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
@@ -62,7 +67,7 @@ namespace ContosoUniversity.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(students.ToPagedList(pageNumber, pageSize));
         }
@@ -75,7 +80,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -94,12 +99,51 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")]Student student)
+        public ActionResult Create([Bind(Include = "LastName, FirstMidName, EnrollmentDate")]Student student, HttpPostedFileBase upload)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        //getting the image
+                        string fileName = System.IO.Path.GetExtension(upload.FileName);
+                        //call of the verification class CheckImage
+                        CheckImage check = new CheckImage();
+
+                        //call of the verification Extension method
+                        bool extensionIsTrue = check.checkExtension(fileName);
+
+                        if (extensionIsTrue == false)
+                        {
+                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            return View();
+                        }
+
+                        //call of the class FileInfo(provides properties and instance methods for the creation, copying, deletion, moving and opening of file
+                        FileInfo fileInfo = new FileInfo(fileName);
+                        //call of the verfication Size method
+                        bool sizeIsCorrect = check.checkSize(fileInfo);
+
+                        if (sizeIsCorrect==false)
+                        {
+                            ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                            return View();
+                        }
+
+                        var avatar = new FileImage
+                        {
+                            FileName = Path.GetFileName(upload.FileName),
+                            FileType = FileType.Avatar,
+                            ContentType = upload.ContentType
+                        };
+                        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                        {
+                            avatar.Content = reader.ReadBytes(upload.ContentLength);
+                        }
+                        student.Files = new List<FileImage> { avatar };
+                    }
                     db.Students.Add(student);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -121,7 +165,7 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
+            Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -134,7 +178,7 @@ namespace ContosoUniversity.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, HttpPostedFileBase upload)
         {
             if (id == null)
             {
@@ -146,6 +190,50 @@ namespace ContosoUniversity.Controllers
             {
                 try
                 {
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        string typeFile = Path.GetExtension(upload.FileName);
+                        CheckImage check = new CheckImage();
+                        bool test = check.checkExtension(typeFile);
+
+                        if (test == false)
+                        {
+                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            return View(studentToUpdate);
+                        }
+                        else
+                        {
+
+                            if (studentToUpdate.Files.Any(f => f.FileType == FileType.Avatar))
+                            {
+                                db.Files.Remove(studentToUpdate.Files.First(f => f.FileType == FileType.Avatar));
+                            }
+
+                            //getting the image
+                            string fileName = System.IO.Path.GetExtension(upload.FileName);
+                            
+                            //call of the verification Extension method
+                            bool extensionIsTrue = check.checkExtension(fileName);
+
+                            if (extensionIsTrue == false)
+                            {
+                                ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                                return View();
+                            }
+
+                            //call of the class FileInfo(provides properties and instance methods for the creation, copying, deletion, moving and opening of file
+                            FileInfo fileInfo = new FileInfo(fileName);
+                            //call of the verfication Size method
+                            bool sizeIsCorrect = check.checkSize(fileInfo);
+
+                            if (sizeIsCorrect == false)
+                            {
+                                ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                                return View();
+                            }
+                        }
+                    }
+                    db.Entry(studentToUpdate).State = EntityState.Modified;
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -241,5 +329,7 @@ namespace ContosoUniversity.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
+
     }
 }
