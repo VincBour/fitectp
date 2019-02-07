@@ -1,4 +1,5 @@
 ﻿
+using ContosoUniversity.BusinessClass;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
@@ -25,7 +26,7 @@ namespace ContosoUniversity.Controllers
         [HttpGet]
         public ActionResult Authenticate()
         {
-            UserViewModel viewModel = new UserViewModel { Authenticate = HttpContext.User.Identity.IsAuthenticated };
+            UserViewModel viewModel = new UserViewModel();
 
             return View(viewModel);
         }
@@ -48,7 +49,7 @@ namespace ContosoUniversity.Controllers
                 Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password);
                 if (user == null)
                 {
-                    ViewBag.PasswordFalse = "Password wrong.";
+                    ViewBag.ErrorUser = ErrorMessages.AuthenticateError();
                     return View();
                 }
                 else
@@ -178,6 +179,7 @@ namespace ContosoUniversity.Controllers
 
 
         #endregion
+
         #region Encode
 
         private static string EncodeMD5(string password)
@@ -186,6 +188,7 @@ namespace ContosoUniversity.Controllers
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordCode)));
         }
         #endregion
+
         #region logOut
         public ActionResult LogOut()
         {

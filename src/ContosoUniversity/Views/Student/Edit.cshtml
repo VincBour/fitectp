@@ -47,6 +47,8 @@
             <div class="col-md-10">
                 <img src="~/File?id=@Model.Files.First(f => f.FileType == FileType.Avatar).ID" alt="avatar" />
             </div>
+            <span class = "text-danger">@ViewBag.ErrorSize</span>
+            <span class = "text-danger">@ViewBag.ErrorExtension</span>
         </div>
     }
 

@@ -10,9 +10,7 @@ namespace ContosoUniversity.ViewModels
 {
     public class UserViewModel
     {
-        
-
-               
+     
         [Required]
         public string Login { get; set; }
 

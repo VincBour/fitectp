@@ -1,4 +1,5 @@
-﻿using ContosoUniversity.Controle;
+﻿using ContosoUniversity.BusinessClass;
+using ContosoUniversity.Controle;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
 using ContosoUniversity.ViewModels;
@@ -117,7 +118,7 @@ namespace ContosoUniversity.Controllers
 
                         if (extensionIsTrue == false)
                         {
-                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            ViewBag.ErrorExtension = ErrorMessages.ErrorExtension();
                             return View();
                         }
 
@@ -127,7 +128,7 @@ namespace ContosoUniversity.Controllers
 
                         if (sizeIsCorrect == false)
                         {
-                            ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
                             return View();
                         }
 
@@ -201,7 +202,7 @@ namespace ContosoUniversity.Controllers
 
                         if (extensionIsTrue == false)
                         {
-                            ViewBag.ErrorType = "Image extention authorized is png or jpeg";
+                            ViewBag.ErrorType = ErrorMessages.ErrorExtension();
                             Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
                             return View(student);
                         }
@@ -211,7 +212,7 @@ namespace ContosoUniversity.Controllers
 
                         if (sizeIsCorrect == false)
                         {
-                            ViewBag.ErrorSize = "The size of the image is limited to 100kb";
+                            ViewBag.ErrorSize = ErrorMessages.ErrorSize();
                             Student student = db.Students.Include(s => s.Files).SingleOrDefault(s => s.ID == id);
                             return View(student);
                         }
