@@ -16,15 +16,15 @@ namespace ContosoUniversity.Tests.Controllers
         private CourseController controllerToTest;
         private SchoolContext dbContext;
 
-        [SetUp]
-        public void Initialize()
-        {
-            httpContext = new MockHttpContextWrapper();
-            controllerToTest = new CourseController();
-            controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
-            dbContext = new DAL.SchoolContext(this.ConnectionString);
-            controllerToTest.DbContext = dbContext;
-        }
+        //[SetUp]
+        //public void Initialize()
+        //{
+        //    httpContext = new MockHttpContextWrapper();
+        //    controllerToTest = new CourseController();
+        //    controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
+        //    dbContext = new DAL.SchoolContext(this.ConnectionString);
+        //    controllerToTest.DbContext = dbContext;
+        //}
 
         [Test]
         public void GetDetails_ValidCourse_Success()

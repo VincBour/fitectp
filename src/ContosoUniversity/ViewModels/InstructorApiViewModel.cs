@@ -11,9 +11,9 @@ namespace ContosoUniversity.ViewModels
 
     public class InstructorApiViewModel
     {
-        public int InstructorID { get; set; }
+        public int instructorId { get; set; }
 
-        public List<CourseSessionApiViewModel> CourseSessionApiViewModels { get; set; }
+        public List<CourseSessionApiViewModel> schedule { get; set; }
 
     }
 }

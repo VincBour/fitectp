@@ -47,19 +47,19 @@ namespace ContosoUniversity.Controllers.Api
 
             SchoolContext db = new SchoolContext();
             InstructorApiViewModel instructorApiViewModel = new InstructorApiViewModel(); //initialization of an instructorVM
-            instructorApiViewModel.InstructorID = id;
-            instructorApiViewModel.CourseSessionApiViewModels = new List<CourseSessionApiViewModel>(); //initialization of his List of CourseSessionVM
+            instructorApiViewModel.instructorId = id;
+            instructorApiViewModel.schedule = new List<CourseSessionApiViewModel>(); //initialization of his List of CourseSessionVM
             List<CourseSession> courseSessions = db.CourseSessions.Where(i => i.InstructorID == id).ToList(); //recovery of the list of this instructor's CourseSessions in the db
             foreach (CourseSession courseSession in courseSessions) //foreach of this CourseSession we create a CourseSsessionVM and we add it to the list of CourseSessionVM
             {
                 CourseSessionApiViewModel session = new CourseSessionApiViewModel
                 {
-                    CourseID = courseSession.CourseID,
-                    DayOfWeek = courseSession.DayOfWeek,
-                    HourStart = courseSession.HourStart,
-                    Duration = ((courseSession.HourEnd - courseSession.HourStart) * 60)
+                    courseId = courseSession.CourseID,
+                    day = courseSession.DayOfWeek,
+                    startHour = courseSession.HourStart,
+                    duration = ((courseSession.HourEnd - courseSession.HourStart) * 60)
                 };
-                instructorApiViewModel.CourseSessionApiViewModels.Add(session);
+                instructorApiViewModel.schedule.Add(session);
             }
             return Ok(instructorApiViewModel); //return of the instructor with his list of courseSessionsVM
         }
