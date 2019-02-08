@@ -27,57 +27,57 @@ namespace ContosoUniversity.Tests.Controllers
         }
 
         [Test]
-        public void GetDetails_ValidStudent_Success()
+        public void GetDetails_ValidCourseSession_Success()
         {
-            //string expectedLastName = "Dubois";
-            //string expectedFirstName = "George";
-
-            //EntityGenerator generator = new EntityGenerator(dbContext);
-            //Student student = generator.CreateStudent(expectedLastName, expectedFirstName);
-
-            //var result = controllerToTest.Details(student.ID) as ViewResult;
-            //var resultModel = result.Model as Student;
-
-            //Assert.That(result, Is.Not.Null);
-            //Assert.That(resultModel, Is.Not.Null);
-            //Assert.That(expectedLastName, Is.EqualTo(resultModel.LastName));
-            //Assert.That(expectedFirstName, Is.EqualTo(resultModel.FirstMidName));
-            Assert.True(true);
+            
+            Assert.True(false);
         }
 
         [Test]
-        public void GetDetails_InvalidStudent_Fail404()
+        public void GetDetails_InvalidCourseSession_Fail404()
         {
-            const int expectedStatusCode = 404;
-            const int invalidId = 99999999;
-
-            var result = controllerToTest.Details(invalidId) as HttpStatusCodeResult;
-
-            Assert.That(result, Is.Not.Null);
-            Assert.That(expectedStatusCode, Is.EqualTo(result.StatusCode));
+            Assert.True(false); ;
         }
 
         [Test]
-        public void Edit_ValidStudentData_Success()
+        public void Edit_ValidCourseSessionData_Success()
         {
-            string expectedLastName = "Wood";
-            string previousLastName = "Dubois";
-            string previousFirstName = "George";
-
-
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudent(previousLastName, previousFirstName);
-            student.LastName = expectedLastName;
-
-            FormDataHelper.PopulateFormData(controllerToTest, student);
-
-            //var result = controllerToTest.EditPost(student.ID) as ViewResult;
-
-            Student savedStudent = dbContext.Students.Find(student.ID);
-
-            //Assert.That(result, Is.Not.Null);
-            //Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
-            Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
+            Assert.True(false);
         }
+
+        [Test]
+        public void Create_DuplicateCourse_Failed()
+        {
+            Assert.True(false);
+        }
+
+        [Test]
+        public void Create_DayOfWeekAndDayStart_Same_Succes()
+        {
+            Assert.True(false);
+        }
+
+        [Test]
+        public void Create_HourStartBetween8And18_Succes()
+        {
+            Assert.True(false);
+        }
+
+        [Test]
+        public void Create_HourEndBetween9And19_Succes()
+        {
+            Assert.True(false);
+        }
+
+        [Test]
+        public void Create_HourEndMinusHourStartNotNegative_Succes()
+        {
+            Assert.True(false);
+        }
+
+       
+
+
+
     }
 }

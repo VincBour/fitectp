@@ -30,25 +30,25 @@ namespace ContosoUniversity.Tests.Controllers
         public void GetDetails_ValidDepartment_Success()
         {
            
-            Assert.True(true);
+            Assert.True(false);
         }
 
         [Test]
         public void GetDetails_InvalidDepartment_Fail404()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
 
         [Test]
         public void Edit_ValidDepartmentData_Success()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
 
         [Test]
         public void Create_ValidDepartmentData_Success()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
     }
 }

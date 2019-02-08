@@ -45,13 +45,13 @@ namespace ContosoUniversity.Controllers
         [HttpPost]
         public ActionResult Authenticate(string login, string password)
         {
-            //string passwordHash = EncodeMD5(password);
+            string passwordHash = EncodeMD5(password);
 
 
             //check user exists and password is correct
             if (db.People.Any(p => p.Login == login))
             {
-                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == password);
+                Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == passwordHash);
                 if (user == null)
                 {
                     ViewBag.ErrorUser = ErrorMessages.AuthenticateError();
@@ -139,7 +139,11 @@ namespace ContosoUniversity.Controllers
                 ViewBag.LoginNotAvailable = "This login already exists.";
                 return View();
             }
-
+            else if (password != confirmPassword)
+            {
+                ViewBag.PasswordsNotEquals = "Confirmation was different from the password";
+                return View();
+            }
             //creation of a new user
             else
             {

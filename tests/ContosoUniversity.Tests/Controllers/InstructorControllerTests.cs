@@ -42,42 +42,44 @@ namespace ContosoUniversity.Tests.Controllers
             //Assert.That(resultModel, Is.Not.Null);
             //Assert.That(expectedLastName, Is.EqualTo(resultModel.LastName));
             //Assert.That(expectedFirstName, Is.EqualTo(resultModel.FirstMidName));
-            Assert.True(true);
+            Assert.True(false);
         }
 
         [Test]
         public void GetDetails_InvalidStudent_Fail404()
         {
-            const int expectedStatusCode = 404;
-            const int invalidId = 99999999;
+            //const int expectedStatusCode = 404;
+            //const int invalidId = 99999999;
 
-            var result = controllerToTest.Details(invalidId) as HttpStatusCodeResult;
+            //var result = controllerToTest.Details(invalidId) as HttpStatusCodeResult;
 
-            Assert.That(result, Is.Not.Null);
-            Assert.That(expectedStatusCode, Is.EqualTo(result.StatusCode));
+            //Assert.That(result, Is.Not.Null);
+            //Assert.That(expectedStatusCode, Is.EqualTo(result.StatusCode));
+            Assert.True(false);
         }
 
         [Test]
         public void Edit_ValidStudentData_Success()
         {
-            string expectedLastName = "Wood";
-            string previousLastName = "Dubois";
-            string previousFirstName = "George";
+            //string expectedLastName = "Wood";
+            //string previousLastName = "Dubois";
+            //string previousFirstName = "George";
 
 
-            EntityGenerator generator = new EntityGenerator(dbContext);
-            Student student = generator.CreateStudent(previousLastName, previousFirstName);
-            student.LastName = expectedLastName;
+            //EntityGenerator generator = new EntityGenerator(dbContext);
+            //Student student = generator.CreateStudent(previousLastName, previousFirstName);
+            //student.LastName = expectedLastName;
 
-            FormDataHelper.PopulateFormData(controllerToTest, student);
+            //FormDataHelper.PopulateFormData(controllerToTest, student);
 
-            //var result = controllerToTest.EditPost(student.ID) as ViewResult;
+            ////var result = controllerToTest.EditPost(student.ID) as ViewResult;
 
-            Student savedStudent = dbContext.Students.Find(student.ID);
+            //Student savedStudent = dbContext.Students.Find(student.ID);
 
-            //Assert.That(result, Is.Not.Null);
-            //Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
-            Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
+            ////Assert.That(result, Is.Not.Null);
+            ////Assert.That((result.Model as Student).LastName, Is.EqualTo(expectedLastName));
+            //Assert.That(savedStudent.LastName, Is.EqualTo(expectedLastName));
+            Assert.True(false);
         }
     }
 }

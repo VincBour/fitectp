@@ -3,6 +3,7 @@ using ContosoUniversity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +40,13 @@ namespace ContosoUniversity.Tests.Tools
             return instructor;
         }
 
+        //Méthod Encode required to test password
+        private string EncodeMD5(string password)
+        {
+            string passwordCode = "ContoseUniversity" + password + "devnet";
+            return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(passwordCode)));
+        }
+
         //Used to Authentication tests
         public Student CreateStudentUser(string login, string password)
         {
@@ -49,26 +57,12 @@ namespace ContosoUniversity.Tests.Tools
                 EnrollmentDate = DateTime.Now,
                 EmailAddress = "email@address.com",
                 Login = login,
-                Password = password
+                Password = EncodeMD5(password)
             };
 
             this.dbContext.Students.Add(student);
+            this.dbContext.SaveChanges();
             return student;
-        }
-
-        //Used to Authentication tests
-        public Instructor CreateInstructorUser(string login, string password)
-        {
-            var instructor = new Instructor
-            {
-                LastName = "lastName",
-                FirstMidName = "firstMidName",
-                Login = login,
-                Password = password,
-                HireDate = DateTime.Now
-            };
-            this.dbContext.Instructors.Add(instructor);
-                return instructor;
         }
     }
 }

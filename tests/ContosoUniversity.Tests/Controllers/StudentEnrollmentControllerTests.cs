@@ -29,22 +29,22 @@ namespace ContosoUniversity.Tests.Controllers
         [Test]
         public void Create_Enrollment_Success()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
         [Test]
         public void NoDuplicateCourse_Success()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
         [Test]
         public void EnrollmentWithGradeNull_Success()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
         [Test]
         public void EnrollmentWithoutStudentID_Fail()
         {
-            Assert.True(true);
+            Assert.True(false);
         }
         
         

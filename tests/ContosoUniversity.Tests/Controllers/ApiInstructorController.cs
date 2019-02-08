@@ -13,47 +13,33 @@ namespace ContosoUniversity.Tests.Controllers
 {
     public class StudentsControllerTests : IntegrationTestsBase
     {
-        private MockHttpContextWrapper httpContext;
-        private StudentsController controllerToTest;
-        private SchoolContext dbContext;
+        //private MockHttpContextWrapper httpContext;
+        //private CourseController controllerToTest;
+        //private SchoolContext dbContext;
 
         //[SetUp]
         //public void Initialize()
         //{
         //    httpContext = new MockHttpContextWrapper();
-        //    controllerToTest = new StudentsController();
+        //    controllerToTest = new CourseController();
         //    controllerToTest.ControllerContext = new ControllerContext(httpContext.Context.Object, new RouteData(), controllerToTest);
         //    dbContext = new DAL.SchoolContext(this.ConnectionString);
-
-        //}
-
-        //[Test]
-        //public void GetReturnsProduct()
-        //{
-        //    Arrange
-        //   var controller = new StudentsApiController(int id);
-        //    controller.Request = new HttpRequestMessage();
-        //    controller.Configuration = new HttpConfiguration();
-
-        //    Act
-        //   var response = controller.Get(10);
-
-        //    Assert
-        //   Product product;
-        //    Assert.IsTrue(response.TryGetContentValue<Product>(out product));
-        //    Assert.AreEqual(10, product.Id);
+        //    controllerToTest.DbContext = dbContext;
         //}
 
         [Test]
-        public void GetAction_StudentApi_Success(int id)
+        public void GetAction_InstructorApi_Success(int id)
         {
 
-            StudentsController studentApi = new StudentsController();
-            studentApi.GetStudent(id);
-
-            Assert.True(true);
+            Assert.True(false);
         }
 
+        [Test]
+        public void GetAction_FormmatInstructorApi_Success(int id)
+        {
+
+            Assert.True(false);
+        }
 
     }
 }

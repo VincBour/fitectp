@@ -55,9 +55,9 @@ namespace ContosoUniversity.Controllers.Api
                 CourseSessionApiViewModel session = new CourseSessionApiViewModel
                 {
                     courseId = courseSession.CourseID,
-                    day = courseSession.DayOfWeek,
-                    startHour = courseSession.HourStart,
-                    duration = ((courseSession.HourEnd - courseSession.HourStart) * 60)
+                    day = courseSession.DayOfWeek.ToString(),
+                    startHour = $"{courseSession.HourStart.ToString()}h00",
+                    duration = ((courseSession.HourEnd - courseSession.HourStart) * 60).ToString()
                 };
                 instructorApiViewModel.schedule.Add(session);
             }
