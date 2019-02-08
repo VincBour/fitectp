@@ -33,20 +33,27 @@ namespace ContosoUniversity.Controllers.Api
             {
                 return NotFound();
             }
-            //int i = 0;
-
+            
+            //Obtain list enrollment of a student
             List<Enrollment> enrollments = db.Enrollments.Where(s => s.StudentID == id).ToList();
-            List<string> CoursIDListe = new List<string>();
+            //Create list of CoursID
+            List<EnrollmentViewModel> CoursIDListe = new List<EnrollmentViewModel>();
+            //Create a object student from studentViewModel
             StudentApiViewModel studentViewModel = new StudentApiViewModel();
+            //Create a object enrollment from enrollmentViewModel
+            EnrollmentViewModel enrollmentViewModel = new EnrollmentViewModel();
+            //implementation of the list EnrollmentViewModel with courseId
             foreach (Enrollment enrollment in enrollments)
             {
-                CoursIDListe.Add(enrollment.CourseID.ToString());
+                enrollmentViewModel.courseId = enrollment.CourseID;
+                CoursIDListe.Add(enrollmentViewModel);
             }
-            studentViewModel.ID = student.ID;
-            studentViewModel.LastName = student.LastName;
-            studentViewModel.FirstMidName = student.FirstMidName;
-            studentViewModel.EnrollmentDate = student.EnrollmentDate;
-            studentViewModel.ListCourseID = CoursIDListe;
+            
+            studentViewModel.id = student.ID;
+            studentViewModel.lastname = student.LastName;
+            studentViewModel.firstname = student.FirstMidName;
+            studentViewModel.enrollmentDate = student.EnrollmentDate.ToString("yyyy-MM-dd");
+            studentViewModel.enrollments = CoursIDListe;
             return Ok(studentViewModel);
         }
 
