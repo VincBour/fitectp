@@ -12,7 +12,9 @@ namespace ContosoUniversity.BusinessClass
         {
             return "Invalid login or password.";
         }
+        #endregion
 
+        #region CourseSession
         public static string ErrorCourseEnrollement()
         {
             return "You already subscribed to this lesson";

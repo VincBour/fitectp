@@ -47,14 +47,13 @@ namespace ContosoUniversity.Controllers
         {
             string passwordHash = EncodeMD5(password);
 
-
             //check user exists and password is correct
             if (db.People.Any(p => p.Login == login))
             {
                 Person user = db.People.SingleOrDefault(u => u.Login == login && u.Password == passwordHash);
                 if (user == null)
                 {
-                    ViewBag.ErrorUser = ErrorMessages.AuthenticateError();
+                    ViewBag.ErrorLoginOrPassword = ErrorMessages.AuthenticateError();
                     return View();
                 }
                 else
@@ -75,7 +74,7 @@ namespace ContosoUniversity.Controllers
             }
             else
             {
-                ViewBag.LoginWrong = "Login not found.";
+                ViewBag.ErrorLoginOrPassword = ErrorMessages.AuthenticateError();
                 return View();
             }
 
@@ -202,7 +201,7 @@ namespace ContosoUniversity.Controllers
         public ActionResult LogOut()
         {
             Session.RemoveAll();
-            Session.Clear();
+            
             return RedirectToAction("Index", "Home");
         }
         #endregion

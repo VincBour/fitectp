@@ -11,7 +11,7 @@ namespace ContosoUniversity.ViewModels
     public class UserViewModel
     {
      
-        [Required]
+        [Required(ErrorMessage = "Login is required")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
