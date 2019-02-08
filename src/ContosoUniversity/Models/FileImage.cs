@@ -8,6 +8,7 @@ namespace ContosoUniversity.Models
 {
     public class FileImage
     {
+        #region Properties
         public int ID { get; set; }
         [StringLength(255)]
         public string FileName { get; set; }
@@ -16,6 +17,10 @@ namespace ContosoUniversity.Models
         public byte[] Content { get; set; }
         public FileType FileType { get; set; }
         public int PersonId { get; set; }
-        public virtual Person Person { get; set; }
+        #endregion
+
+        #region Navigation
+        public virtual Person Person { get; set; } 
+        #endregion
     }
 }

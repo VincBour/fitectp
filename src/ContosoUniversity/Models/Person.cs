@@ -38,6 +38,10 @@ namespace ContosoUniversity.Models
                 return LastName + ", " + FirstMidName;
             }
         }
-        public virtual ICollection<FileImage> Files { get; set; }
+
+
+        #region Navigation
+        public virtual ICollection<FileImage> Files { get; set; } 
+        #endregion
     }
 }

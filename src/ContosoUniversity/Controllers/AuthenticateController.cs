@@ -60,7 +60,7 @@ namespace ContosoUniversity.Controllers
                 else
                 {
                     Session["ID"] = user.ID.ToString();
-                    Session["Login"] = user.Login.ToString();
+                    Session["Login"] = user.FullName.ToString();
                     if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
                     {
                         Session["Type"] = "Student";

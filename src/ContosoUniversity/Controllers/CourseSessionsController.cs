@@ -59,6 +59,7 @@ namespace ContosoUniversity.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Check Instructor can have only one coursesession of the same course
                 List<CourseSession> sessions = new List<CourseSession>();
                 sessions = db.CourseSessions.ToList();
                 foreach (var item in sessions)
@@ -66,22 +67,25 @@ namespace ContosoUniversity.Controllers
                     if (courseSession.InstructorID == item.InstructorID && courseSession.CourseID == item.CourseID)
                     {
                         ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
-                        ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                        ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName");
                         ViewBag.ErrorMessage = ErrorMessages.ErrorMessageSameCourse();
                         return View();
                     }
                 }
-                if ((courseSession.Duration) < 0)
+                //Check minimal duration of one coursesession
+                if ((courseSession.Duration) < 1)
                 {
                     ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
-                    ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                    ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName");
                     ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNegativeTime();
                     return View();
                 }
+
+                //Check that the day of course is the same of the date start
                 if(courseSession.DayOfWeek.ToString() != courseSession.DateTime.DayOfWeek.ToString())
                 {
                     ViewBag.CourseID = new SelectList(db.Courses, "CourseID", "Title");
-                    ViewBag.InstructorID = new SelectList(db.People, "ID", "LastName");
+                    ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName");
                     ViewBag.ErrorMessage = ErrorMessages.ErrorMessageNotSameDay();
                     return View();
                 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ContosoUniversity.ViewModels
 {
-    public class StudentEnrollment
+    public class StudentEnrollmentViewModel
     {
         public Student Student { get; set; }
     }

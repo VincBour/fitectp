@@ -16,14 +16,16 @@ namespace ContosoUniversity.BusinessClass
         bool testExt = false;
         public bool checkExtension(string fileName)
         {
-            string typeFile = System.IO.Path.GetExtension(fileName);
-            if (typeFile == ".png" || typeFile == ".jpeg" || typeFile == ".jpg")
+           
+            if (fileName == ".png" || fileName == ".jpeg")
             {
                 testExt = true;
 
             }
             return testExt;
         }
+
+
         bool testSize = false;
         public bool checkSize(long fileSize)
         {
