@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace ContosoUniversity.Controllers
 {
@@ -22,6 +23,21 @@ namespace ContosoUniversity.Controllers
             set { db = value; }
         }
 
+        #region ObtainUser
+        public Person ObtainUser(int id)
+        {
+            return db.People.FirstOrDefault(u => u.ID == id);
+        }
+
+        public Person ObtainUser(string idString)
+        {
+            int id;
+            if (int.TryParse(idString, out id))
+                return ObtainUser(id);
+            return null;
+        }
+        #endregion
+
         #region Authentication
 
         /// <summary>
@@ -31,7 +47,11 @@ namespace ContosoUniversity.Controllers
         [HttpGet]
         public ActionResult Authenticate()
         {
-            UserViewModel viewModel = new UserViewModel();
+            UserViewModel viewModel = new UserViewModel { Authentified = HttpContext.User.Identity.IsAuthenticated };
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                viewModel.Person = ObtainUser(HttpContext.User.Identity.Name);
+            }
 
             return View(viewModel);
         }
@@ -58,6 +78,7 @@ namespace ContosoUniversity.Controllers
                 }
                 else
                 {
+                    FormsAuthentication.SetAuthCookie(user.ID.ToString(), false);
                     Session["ID"] = user.ID.ToString();
                     Session["Login"] = user.FullName.ToString();
                     if ((db.Students.FirstOrDefault(p => p.ID == user.ID)) != null)
@@ -159,6 +180,7 @@ namespace ContosoUniversity.Controllers
                     };
                     db.Students.Add(student);
                     db.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(student.ID.ToString(), false);
                     Session["ID"] = student.ID.ToString();
                     Session["Login"] = student.Login.ToString();
                     Session["Type"] = "Student";
@@ -177,6 +199,7 @@ namespace ContosoUniversity.Controllers
                     };
                     db.Instructors.Add(instructor);
                     db.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(instructor.ID.ToString(), false);
                     Session["ID"] = instructor.ID.ToString();
                     Session["Login"] = instructor.Login.ToString();
                     Session["Type"] = "Instructor";

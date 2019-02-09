@@ -13,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace ContosoUniversity.Controllers
 {
+    [Authorize]
     public class InstructorController : Controller
     {
         private SchoolContext db = new SchoolContext();

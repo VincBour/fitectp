@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ContosoUniversity.Controllers
 {
+    [Authorize]
     public class FileController : Controller
     {
         private SchoolContext db = new SchoolContext();

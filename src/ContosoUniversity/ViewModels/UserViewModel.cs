@@ -18,6 +18,7 @@ namespace ContosoUniversity.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        
+        public Person Person { get; set; }
+        public bool Authentified { get; set; }
     }
 }

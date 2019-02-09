@@ -13,7 +13,7 @@ using ContosoUniversity.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
-
+    [Authorize]
     public class HomeController : Controller
     {
         private SchoolContext db = new SchoolContext();
@@ -24,6 +24,7 @@ namespace ContosoUniversity.Controllers
         }
 
         #region Methods preexisting
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
