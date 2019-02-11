@@ -182,7 +182,7 @@ namespace ContosoUniversity.Controllers
                     db.SaveChanges();
                     FormsAuthentication.SetAuthCookie(student.ID.ToString(), false);
                     Session["ID"] = student.ID.ToString();
-                    Session["Login"] = student.Login.ToString();
+                    Session["Login"] = student.FullName.ToString();
                     Session["Type"] = "Student";
                     return RedirectToAction("Index", "Home");
                 }
@@ -201,7 +201,7 @@ namespace ContosoUniversity.Controllers
                     db.SaveChanges();
                     FormsAuthentication.SetAuthCookie(instructor.ID.ToString(), false);
                     Session["ID"] = instructor.ID.ToString();
-                    Session["Login"] = instructor.Login.ToString();
+                    Session["Login"] = instructor.FullName.ToString();
                     Session["Type"] = "Instructor";
                     return RedirectToAction("Index", "Home");
                 }
@@ -224,7 +224,7 @@ namespace ContosoUniversity.Controllers
         public ActionResult LogOut()
         {
             Session.RemoveAll();
-            
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
         #endregion

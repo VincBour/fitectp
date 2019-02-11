@@ -22,7 +22,7 @@ namespace ContosoUniversity.ViewModels
         [Column("FirstName")]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; }
-        [Display(Name ="Are you a Student or a Instructor")]
+        [Display(Name ="Student or Instructor?")]
         public TypeOfPerson Type { get; set; }
 
         [Required]

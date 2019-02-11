@@ -26,7 +26,7 @@ namespace ContosoUniversity.Models
         
         
 
-        [Required(ErrorMessage ="Email is required")]
+        //[Required(ErrorMessage ="Email is required")]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
         
